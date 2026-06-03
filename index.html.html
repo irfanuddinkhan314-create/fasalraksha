@@ -1,0 +1,2527 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KrishiGyan — স্মার্ট কৃষি প্ল্যাটফর্ম বাংলাদেশ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+/* ============================================================
+   DESIGN SYSTEM — KrishiGyan Smart Agriculture Platform
+   Aesthetic: Lush organic-tech — deep forest greens + warm gold
+   Rich, data-dense, mobile-first agricultural dashboard
+   ============================================================ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  /* Primary palette */
+  --g900:#0d2010; --g800:#142d16; --g700:#1a3d1c; --g600:#234d25;
+  --g500:#2e6330; --g400:#3a8035; --g300:#52a84a; --g200:#7ecf74;
+  --g100:#b5e8af; --g50:#e6f7e4;
+
+  /* Accent gold */
+  --gold:#d4a017; --gold-l:#e8bc3a; --gold-dim:rgba(212,160,23,.12);
+  --gold-border:rgba(212,160,23,.25);
+
+  /* Accent teal */
+  --teal:#1aab8a; --teal-dim:rgba(26,171,138,.1);
+
+  /* Warm red */
+  --red:#d64a2e; --red-dim:rgba(214,74,46,.1);
+
+  /* Amber */
+  --amb:#e08c20; --amb-dim:rgba(224,140,32,.1);
+
+  /* Neutrals */
+  --bg:#f7faf6; --bg2:#eff5ee; --bg3:#e3ede2;
+  --surface:#ffffff; --surface2:rgba(255,255,255,.7);
+  --border:rgba(46,99,48,.12); --border2:rgba(46,99,48,.22);
+
+  --text1:#0d2010; --text2:#3a5c3c; --text3:#6a8a6c; --text4:#9ab09c;
+
+  /* Typography */
+  --ff-display:'Yeseva One', Georgia, serif;
+  --ff-body:'Nunito', sans-serif;
+
+  /* Spacing */
+  --r-sm:8px; --r-md:14px; --r-lg:20px; --r-xl:28px; --r-2xl:40px;
+
+  /* Shadows */
+  --sh-sm:0 1px 4px rgba(13,32,16,.08);
+  --sh-md:0 4px 16px rgba(13,32,16,.10);
+  --sh-lg:0 8px 32px rgba(13,32,16,.12);
+  --sh-xl:0 16px 60px rgba(13,32,16,.15);
+
+  /* Gradients */
+  --grad-hero:linear-gradient(140deg,#0d2010 0%,#1a3d1c 40%,#0f3520 100%);
+  --grad-green:linear-gradient(135deg,var(--g400),var(--g300));
+  --grad-gold:linear-gradient(135deg,#b8860b,var(--gold-l));
+  --grad-card:linear-gradient(145deg,#ffffff,#f4faf3);
+}
+
+/* Dark mode hint for nav */
+html { scroll-behavior:smooth; }
+
+body {
+  font-family:var(--ff-body);
+  background:var(--bg);
+  color:var(--text1);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+/* ===== UTILITIES ===== */
+.hidden { display:none !important; }
+.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+.text-center { text-align:center; }
+.mt-4 { margin-top:16px; } .mt-6 { margin-top:24px; } .mt-8 { margin-top:32px; }
+.mb-4 { margin-bottom:16px; } .mb-6 { margin-bottom:24px; }
+.flex { display:flex; } .flex-col { flex-direction:column; }
+.items-center { align-items:center; } .justify-between { justify-content:space-between; }
+.gap-2 { gap:8px; } .gap-3 { gap:12px; } .gap-4 { gap:16px; }
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(24px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes scaleIn {
+  from { opacity:0; transform:scale(.95); }
+  to   { opacity:1; transform:scale(1); }
+}
+@keyframes float {
+  0%,100% { transform:translateY(0); }
+  50%      { transform:translateY(-8px); }
+}
+@keyframes shimmerFlow {
+  0%   { background-position:-200% center; }
+  100% { background-position:200% center; }
+}
+@keyframes pulse {
+  0%,100% { box-shadow:0 0 0 0 rgba(52,168,74,.3); }
+  50%      { box-shadow:0 0 0 10px rgba(52,168,74,.0); }
+}
+@keyframes spin { from { transform:rotate(0); } to { transform:rotate(360deg); } }
+@keyframes scanline {
+  0%   { top:5%; opacity:0; }
+  10%  { opacity:1; }
+  90%  { opacity:1; }
+  100% { top:95%; opacity:0; }
+}
+@keyframes barGrow { from { width:0; } to { width:var(--w); } }
+@keyframes countUp {
+  from { opacity:0; transform:scale(.7); }
+  to   { opacity:1; transform:scale(1); }
+}
+@keyframes typewriter {
+  from { width:0; }
+  to   { width:100%; }
+}
+@keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
+@keyframes slideRight { from { transform:translateX(-20px); opacity:0; } to { transform:translateX(0); opacity:1; } }
+@keyframes ripple {
+  0%   { transform:scale(0); opacity:1; }
+  100% { transform:scale(4); opacity:0; }
+}
+
+.anim-fade-up   { animation:fadeUp .5s cubic-bezier(.22,1,.36,1) both; }
+.anim-fade-up-2 { animation:fadeUp .5s .1s cubic-bezier(.22,1,.36,1) both; }
+.anim-fade-up-3 { animation:fadeUp .5s .2s cubic-bezier(.22,1,.36,1) both; }
+.anim-fade-up-4 { animation:fadeUp .5s .3s cubic-bezier(.22,1,.36,1) both; }
+.anim-scale-in  { animation:scaleIn .4s cubic-bezier(.22,1,.36,1) both; }
+
+/* ===== PAGE SYSTEM ===== */
+.page { display:none; animation:fadeIn .35s ease; }
+.page.active { display:block; }
+
+/* ===== TOP NAVIGATION ===== */
+.topbar {
+  position:sticky; top:0; z-index:200;
+  background:rgba(247,250,246,.92);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  box-shadow:var(--sh-sm);
+}
+.topbar-inner {
+  max-width:1400px; margin:0 auto;
+  padding:0 16px;
+  display:flex; align-items:center; justify-content:space-between;
+  height:62px; gap:12px;
+}
+.logo { display:flex; align-items:center; gap:10px; cursor:pointer; flex-shrink:0; }
+.logo-mark {
+  width:38px; height:38px;
+  background:var(--grad-green);
+  border-radius:10px;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 2px 12px rgba(58,128,53,.35);
+}
+.logo-mark i { font-size:20px; color:#fff; }
+.logo-text { display:flex; flex-direction:column; line-height:1.1; }
+.logo-name { font-family:var(--ff-display); font-size:18px; color:var(--g700); letter-spacing:-.3px; }
+.logo-tagline { font-size:10px; color:var(--text3); font-weight:600; letter-spacing:.5px; text-transform:uppercase; }
+
+/* Desktop nav */
+.topbar-nav { display:flex; align-items:center; gap:2px; flex:1; justify-content:center; }
+.nav-item {
+  display:flex; align-items:center; gap:5px;
+  padding:7px 12px; border-radius:10px;
+  font-size:13px; font-weight:600;
+  color:var(--text2); background:transparent; border:none;
+  cursor:pointer; transition:all .2s; white-space:nowrap;
+}
+.nav-item:hover { background:var(--g50); color:var(--g500); }
+.nav-item.active { background:var(--g50); color:var(--g500); }
+.nav-item i { font-size:15px; }
+
+/* Search */
+.topbar-search {
+  display:flex; align-items:center; gap:8px;
+  background:var(--bg2); border:1px solid var(--border2);
+  border-radius:50px; padding:7px 14px;
+  cursor:pointer; transition:all .2s; flex-shrink:0;
+}
+.topbar-search:hover { border-color:var(--g300); background:#fff; }
+.topbar-search i { font-size:15px; color:var(--text3); }
+.topbar-search span { font-size:13px; color:var(--text3); font-weight:500; }
+
+/* Hamburger */
+.hamburger {
+  display:none; flex-direction:column; gap:5px;
+  padding:8px; cursor:pointer; border:none; background:transparent;
+}
+.hamburger span {
+  width:22px; height:2px; background:var(--text2); border-radius:2px;
+  transition:all .3s;
+}
+
+/* Mobile nav drawer */
+.mobile-nav {
+  display:none; position:fixed; inset:0; z-index:300;
+}
+.mobile-nav.open { display:block; }
+.mobile-nav-backdrop {
+  position:absolute; inset:0; background:rgba(0,0,0,.5);
+  backdrop-filter:blur(4px); animation:fadeIn .2s;
+}
+.mobile-nav-panel {
+  position:absolute; top:0; left:0; bottom:0;
+  width:min(300px, 85vw);
+  background:var(--surface); padding:0;
+  box-shadow:var(--sh-xl);
+  animation:slideRight .3s cubic-bezier(.22,1,.36,1);
+  overflow-y:auto;
+}
+.mobile-nav-header {
+  padding:18px 20px;
+  background:var(--grad-hero);
+  display:flex; align-items:center; justify-content:space-between;
+}
+.mobile-nav-logo { font-family:var(--ff-display); font-size:20px; color:#fff; }
+.mobile-nav-close {
+  width:32px; height:32px; border-radius:50%;
+  background:rgba(255,255,255,.15); border:none;
+  color:#fff; font-size:16px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+}
+.mobile-nav-links { padding:12px; }
+.mobile-nav-item {
+  display:flex; align-items:center; gap:12px;
+  padding:13px 16px; border-radius:12px;
+  font-size:15px; font-weight:600; color:var(--text2);
+  cursor:pointer; transition:all .2s; border:none; background:transparent;
+  width:100%; text-align:left;
+}
+.mobile-nav-item:hover, .mobile-nav-item.active { background:var(--g50); color:var(--g500); }
+.mobile-nav-item i { font-size:20px; color:var(--g400); }
+
+/* ===== SEARCH MODAL ===== */
+.search-modal {
+  display:none; position:fixed; inset:0; z-index:500;
+  background:rgba(13,32,16,.6); backdrop-filter:blur(8px);
+  padding:20px 16px;
+}
+.search-modal.open { display:flex; align-items:flex-start; justify-content:center; animation:fadeIn .2s; }
+.search-modal-box {
+  background:#fff; border-radius:var(--r-xl);
+  box-shadow:var(--sh-xl);
+  width:100%; max-width:640px; overflow:hidden;
+  animation:scaleIn .3s cubic-bezier(.22,1,.36,1);
+  margin-top:40px;
+}
+.search-input-row {
+  display:flex; align-items:center; gap:12px; padding:16px 20px;
+  border-bottom:1px solid var(--border);
+}
+.search-input-row i { font-size:22px; color:var(--g400); flex-shrink:0; }
+.search-modal-input {
+  flex:1; border:none; outline:none; font-size:17px;
+  font-family:var(--ff-body); color:var(--text1); background:transparent;
+}
+.search-close { padding:6px; cursor:pointer; color:var(--text3); border:none; background:transparent; border-radius:8px; }
+.search-close:hover { background:var(--bg2); }
+.search-results { padding:8px; max-height:400px; overflow-y:auto; }
+.search-cat-label { font-size:11px; font-weight:700; color:var(--text3); letter-spacing:.8px; text-transform:uppercase; padding:8px 12px 4px; }
+.search-result-item {
+  display:flex; align-items:center; gap:12px; padding:11px 12px; border-radius:12px;
+  cursor:pointer; transition:background .15s;
+}
+.search-result-item:hover { background:var(--g50); }
+.search-result-emoji { width:36px; height:36px; display:flex; align-items:center; justify-content:center; font-size:22px; background:var(--g50); border-radius:10px; flex-shrink:0; }
+.search-result-title { font-size:14px; font-weight:600; color:var(--text1); }
+.search-result-sub { font-size:12px; color:var(--text3); }
+
+/* ===== CONTENT WRAPPER ===== */
+.content { max-width:1400px; margin:0 auto; padding:0 16px; }
+.section { padding:52px 0; }
+.section-sm { padding:32px 0; }
+
+/* Section header */
+.section-head { margin-bottom:32px; }
+.section-eyebrow { display:inline-flex; align-items:center; gap:6px; background:var(--g50); border:1px solid rgba(58,128,53,.2); color:var(--g500); padding:5px 14px; border-radius:50px; font-size:11px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; margin-bottom:12px; }
+.section-eyebrow i { font-size:13px; }
+.section-title { font-family:var(--ff-display); font-size:clamp(24px,4vw,36px); color:var(--text1); line-height:1.2; margin-bottom:10px; }
+.section-sub { font-size:15px; color:var(--text2); max-width:560px; line-height:1.7; }
+
+/* ===== BUTTONS ===== */
+.btn {
+  display:inline-flex; align-items:center; gap:8px;
+  padding:11px 22px; border-radius:50px; border:none;
+  font-size:14px; font-weight:700; font-family:var(--ff-body);
+  cursor:pointer; transition:all .25s cubic-bezier(.22,1,.36,1);
+  white-space:nowrap; text-decoration:none;
+}
+.btn-primary {
+  background:var(--grad-green); color:#fff;
+  box-shadow:0 4px 16px rgba(58,128,53,.35);
+}
+.btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(58,128,53,.45); }
+.btn-gold {
+  background:var(--grad-gold); color:#fff;
+  box-shadow:0 4px 16px rgba(212,160,23,.3);
+}
+.btn-gold:hover { transform:translateY(-2px); }
+.btn-outline {
+  background:transparent; color:var(--g500);
+  border:1.5px solid var(--g300);
+}
+.btn-outline:hover { background:var(--g50); }
+.btn-ghost {
+  background:transparent; color:var(--text2);
+  border:1.5px solid var(--border2);
+}
+.btn-ghost:hover { background:var(--bg2); color:var(--text1); }
+.btn-sm { padding:8px 16px; font-size:13px; }
+.btn-lg { padding:16px 32px; font-size:16px; }
+.btn-icon { width:40px; height:40px; padding:0; justify-content:center; border-radius:12px; }
+
+/* ===== CARDS ===== */
+.card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--r-lg); box-shadow:var(--sh-sm);
+  transition:all .25s cubic-bezier(.22,1,.36,1);
+  overflow:hidden;
+}
+.card:hover { box-shadow:var(--sh-lg); transform:translateY(-3px); border-color:var(--border2); }
+.card-glass {
+  background:rgba(255,255,255,.6); backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.8);
+}
+
+/* ===== BADGES ===== */
+.badge {
+  display:inline-flex; align-items:center; gap:5px;
+  padding:4px 10px; border-radius:50px; font-size:11px; font-weight:700;
+}
+.badge-green { background:var(--g50); color:var(--g600); border:1px solid rgba(58,128,53,.2); }
+.badge-gold  { background:var(--gold-dim); color:#8a6010; border:1px solid var(--gold-border); }
+.badge-red   { background:var(--red-dim); color:var(--red); border:1px solid rgba(214,74,46,.2); }
+.badge-teal  { background:var(--teal-dim); color:#0a7060; border:1px solid rgba(26,171,138,.2); }
+.badge-amb   { background:var(--amb-dim); color:#8a5010; border:1px solid rgba(224,140,32,.2); }
+
+/* ===== TAG CHIP ===== */
+.tag { display:inline-block; padding:3px 10px; border-radius:50px; font-size:11px; font-weight:600; background:var(--g50); color:var(--g500); }
+
+/* ===== HERO SECTION ===== */
+#page-home .hero {
+  background:var(--grad-hero);
+  position:relative; overflow:hidden;
+  padding:72px 16px 80px;
+  min-height:620px;
+  display:flex; align-items:center;
+}
+.hero-bg-circles { position:absolute; inset:0; pointer-events:none; }
+.hero-circle {
+  position:absolute; border-radius:50%;
+  background:radial-gradient(circle, rgba(92,200,58,.12) 0%, transparent 70%);
+}
+.hero-circle-1 { width:500px; height:500px; top:-150px; right:-100px; }
+.hero-circle-2 { width:300px; height:300px; bottom:-80px; left:-60px; }
+.hero-circle-3 { width:200px; height:200px; top:30%; left:40%; background:radial-gradient(circle, rgba(212,160,23,.08) 0%, transparent 70%); }
+
+.hero-content { max-width:1400px; margin:0 auto; width:100%; display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; }
+.hero-text { position:relative; z-index:1; }
+.hero-eyebrow {
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(92,200,58,.15); border:1px solid rgba(92,200,58,.25);
+  color:var(--g200); padding:6px 16px; border-radius:50px;
+  font-size:12px; font-weight:700; letter-spacing:.8px; text-transform:uppercase;
+  margin-bottom:20px; animation:float 3s ease-in-out infinite;
+}
+.hero-title {
+  font-family:var(--ff-display); color:#fff;
+  font-size:clamp(32px,5vw,56px); line-height:1.15; margin-bottom:18px;
+  animation:fadeUp .7s .1s cubic-bezier(.22,1,.36,1) both;
+}
+.hero-title em { color:var(--gold-l); font-style:normal; }
+.hero-sub {
+  font-size:clamp(15px,2vw,18px); color:rgba(255,255,255,.7); line-height:1.75;
+  margin-bottom:32px; max-width:460px;
+  animation:fadeUp .7s .2s cubic-bezier(.22,1,.36,1) both;
+}
+.hero-actions { display:flex; gap:12px; flex-wrap:wrap; animation:fadeUp .7s .3s cubic-bezier(.22,1,.36,1) both; }
+.hero-stats {
+  display:flex; gap:24px; margin-top:36px; flex-wrap:wrap;
+  animation:fadeUp .7s .4s cubic-bezier(.22,1,.36,1) both;
+}
+.hero-stat-item { text-align:center; }
+.hero-stat-num { font-family:var(--ff-display); font-size:28px; color:#fff; line-height:1; }
+.hero-stat-lbl { font-size:12px; color:rgba(255,255,255,.5); font-weight:500; margin-top:3px; }
+
+/* Hero right — feature cards grid */
+.hero-visual {
+  position:relative; z-index:1;
+  animation:fadeUp .8s .2s cubic-bezier(.22,1,.36,1) both;
+}
+.hero-cards-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.hero-mini-card {
+  background:rgba(255,255,255,.08); backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.12); border-radius:var(--r-lg);
+  padding:16px; cursor:pointer; transition:all .25s;
+}
+.hero-mini-card:hover { background:rgba(255,255,255,.14); transform:scale(1.02); }
+.hero-mini-card-icon { width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px; margin-bottom:10px; }
+.hero-mini-card-title { font-size:13px; font-weight:700; color:#fff; margin-bottom:4px; }
+.hero-mini-card-desc { font-size:11px; color:rgba(255,255,255,.5); line-height:1.5; }
+
+/* ===== STATS STRIP ===== */
+.stats-strip {
+  background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+  padding:28px 0;
+}
+.stats-strip-inner { max-width:1400px; margin:0 auto; padding:0 16px; display:grid; grid-template-columns:repeat(auto-fit, minmax(140px,1fr)); gap:20px; }
+.stat-block { text-align:center; padding:12px; border-radius:var(--r-md); transition:background .2s; cursor:default; }
+.stat-block:hover { background:var(--bg2); }
+.stat-block-num { font-family:var(--ff-display); font-size:clamp(22px,3vw,32px); color:var(--g500); margin-bottom:4px; }
+.stat-block-label { font-size:12px; color:var(--text3); font-weight:600; }
+
+/* ===== QUICK ACCESS TOOLS ===== */
+.tools-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(160px,1fr)); gap:14px; }
+.tool-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--r-lg); padding:20px 16px; text-align:center;
+  cursor:pointer; transition:all .25s; box-shadow:var(--sh-sm);
+  position:relative; overflow:hidden;
+}
+.tool-card::before {
+  content:''; position:absolute; inset:0;
+  background:var(--grad-green); opacity:0; transition:opacity .25s;
+}
+.tool-card:hover { transform:translateY(-4px); box-shadow:var(--sh-lg); border-color:var(--g200); }
+.tool-card:hover::before { opacity:.04; }
+.tool-card-icon {
+  width:52px; height:52px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  margin:0 auto 12px; font-size:26px;
+}
+.tool-card-title { font-size:13px; font-weight:700; color:var(--text1); margin-bottom:4px; }
+.tool-card-desc { font-size:11px; color:var(--text3); line-height:1.5; }
+
+/* ===== PLANT ENCYCLOPEDIA ===== */
+.plant-filters {
+  display:flex; gap:8px; flex-wrap:wrap; margin-bottom:24px;
+}
+.filter-pill {
+  padding:7px 16px; border-radius:50px; font-size:13px; font-weight:600;
+  background:var(--surface); border:1.5px solid var(--border2);
+  color:var(--text2); cursor:pointer; transition:all .2s;
+}
+.filter-pill:hover, .filter-pill.active {
+  background:var(--g50); border-color:var(--g300); color:var(--g600);
+}
+
+.plant-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(230px, 1fr)); gap:18px; }
+
+.plant-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--r-lg); overflow:hidden; cursor:pointer;
+  transition:all .25s cubic-bezier(.22,1,.36,1); box-shadow:var(--sh-sm);
+  position:relative;
+}
+.plant-card:hover { transform:translateY(-5px); box-shadow:var(--sh-lg); border-color:var(--g200); }
+
+.plant-card-img {
+  height:150px; position:relative; overflow:hidden;
+  display:flex; align-items:center; justify-content:center; font-size:64px;
+}
+.plant-card-img-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(13,32,16,.6), transparent 50%);
+}
+.plant-card-season {
+  position:absolute; top:10px; right:10px;
+}
+.plant-card-fav {
+  position:absolute; top:10px; left:10px;
+  width:28px; height:28px; border-radius:50%;
+  background:rgba(255,255,255,.9); border:none;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; font-size:14px; transition:all .2s;
+  box-shadow:var(--sh-sm);
+}
+.plant-card-fav:hover { transform:scale(1.1); }
+.plant-card-fav.loved { color:var(--red); }
+
+.plant-card-body { padding:14px; }
+.plant-card-name { font-size:15px; font-weight:700; color:var(--text1); margin-bottom:3px; }
+.plant-card-sci  { font-size:12px; color:var(--text3); font-style:italic; margin-bottom:8px; }
+.plant-card-meta { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px; }
+.plant-card-foot { display:flex; align-items:center; justify-content:space-between; }
+.plant-difficulty { display:flex; gap:3px; }
+.plant-difficulty-dot { width:8px; height:8px; border-radius:50%; background:var(--border2); }
+.plant-difficulty-dot.filled { background:var(--g400); }
+
+/* ===== PLANT DETAIL PAGE ===== */
+.plant-detail-hero {
+  background:var(--grad-hero); padding:40px 16px 0;
+  position:relative; overflow:hidden;
+}
+.plant-detail-back {
+  display:inline-flex; align-items:center; gap:7px;
+  color:rgba(255,255,255,.7); font-size:13px; font-weight:600;
+  cursor:pointer; border:none; background:transparent;
+  padding:8px 0; transition:color .2s; margin-bottom:20px;
+}
+.plant-detail-back:hover { color:#fff; }
+.plant-detail-top { display:grid; grid-template-columns:1fr auto; gap:32px; align-items:start; padding-bottom:32px; }
+.plant-detail-emoji { font-size:clamp(72px,10vw,110px); animation:float 4s ease-in-out infinite; }
+.plant-detail-names h1 { font-family:var(--ff-display); font-size:clamp(24px,5vw,40px); color:#fff; line-height:1.2; margin-bottom:6px; }
+.plant-detail-names h2 { font-size:clamp(14px,2vw,18px); color:rgba(255,255,255,.6); font-weight:500; font-style:italic; margin-bottom:14px; }
+.plant-detail-tags { display:flex; gap:8px; flex-wrap:wrap; }
+.plant-detail-tag {
+  padding:5px 14px; border-radius:50px; font-size:12px; font-weight:600;
+  background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.18); color:rgba(255,255,255,.8);
+}
+
+.plant-detail-content { padding:24px 0 48px; }
+
+/* Tabs */
+.tabs { display:flex; gap:4px; overflow-x:auto; margin-bottom:28px; padding-bottom:2px; }
+.tabs::-webkit-scrollbar { height:0; }
+.tab-btn {
+  display:flex; align-items:center; gap:6px;
+  padding:10px 18px; border-radius:50px; border:none;
+  font-size:13px; font-weight:700; cursor:pointer;
+  white-space:nowrap; transition:all .2s; flex-shrink:0;
+  background:var(--surface); color:var(--text2); border:1.5px solid var(--border);
+}
+.tab-btn:hover { border-color:var(--g300); color:var(--g500); }
+.tab-btn.active { background:var(--g50); color:var(--g600); border-color:var(--g300); }
+.tab-panel { display:none; animation:fadeIn .3s; }
+.tab-panel.active { display:block; }
+
+/* Info grid in plant detail */
+.info-grid-2 { display:grid; grid-template-columns:repeat(auto-fill, minmax(180px,1fr)); gap:14px; }
+.info-block {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--r-md); padding:16px; transition:all .2s;
+}
+.info-block:hover { border-color:var(--g200); background:var(--bg2); }
+.info-block-icon { font-size:22px; color:var(--g400); margin-bottom:8px; display:block; }
+.info-block-label { font-size:11px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:.6px; margin-bottom:5px; }
+.info-block-val { font-size:15px; font-weight:700; color:var(--text1); }
+.info-block-sub { font-size:12px; color:var(--text3); margin-top:2px; }
+
+/* Requirement bars */
+.req-bar-label { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; font-size:13px; font-weight:600; }
+.req-bar-track { height:8px; background:var(--bg3); border-radius:50px; overflow:hidden; margin-bottom:14px; }
+.req-bar-fill { height:100%; border-radius:50px; transition:width 1s cubic-bezier(.4,0,.2,1) .3s; }
+
+/* ===== DISEASE DETECTOR ===== */
+.detector-layout { display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:start; }
+
+.upload-zone {
+  border:2px dashed rgba(58,128,53,.3); border-radius:var(--r-xl);
+  padding:52px 24px; text-align:center; cursor:pointer;
+  background:linear-gradient(135deg, var(--g50), rgba(255,255,255,.5));
+  transition:all .3s; position:relative; overflow:hidden;
+}
+.upload-zone::before {
+  content:''; position:absolute; inset:0;
+  background:var(--grad-green); opacity:0; transition:opacity .3s;
+}
+.upload-zone:hover, .upload-zone.drag { border-color:var(--g300); border-style:solid; }
+.upload-zone:hover::before, .upload-zone.drag::before { opacity:.03; }
+.upload-zone input { position:absolute; inset:0; opacity:0; cursor:pointer; }
+.upload-icon {
+  width:72px; height:72px; border-radius:50%;
+  background:var(--g50); border:2px solid rgba(58,128,53,.2);
+  display:flex; align-items:center; justify-content:center;
+  font-size:32px; color:var(--g400); margin:0 auto 16px;
+  transition:all .3s;
+}
+.upload-zone:hover .upload-icon { background:var(--g100); border-color:var(--g300); transform:scale(1.05); }
+.upload-title { font-size:16px; font-weight:700; color:var(--text1); margin-bottom:8px; }
+.upload-sub { font-size:13px; color:var(--text3); line-height:1.6; }
+
+.preview-section { display:none; }
+.preview-section.show { display:block; }
+.img-preview-wrap { border-radius:var(--r-lg); overflow:hidden; position:relative; margin-bottom:16px; }
+.img-preview-wrap img { width:100%; max-height:260px; object-fit:cover; display:block; }
+.img-preview-scan {
+  position:absolute; left:0; right:0; height:3px;
+  background:linear-gradient(90deg, transparent, var(--g300), transparent);
+  box-shadow:0 0 12px rgba(82,168,74,.8);
+  animation:scanline 2s ease-in-out infinite;
+  pointer-events:none;
+}
+
+/* Loading AI */
+.ai-processing { padding:36px 0; text-align:center; display:none; }
+.ai-processing.show { display:block; animation:fadeIn .3s; }
+.ai-spinner {
+  width:64px; height:64px; border-radius:50%;
+  border:3px solid var(--g50); border-top-color:var(--g400);
+  animation:spin 1s linear infinite; margin:0 auto 16px;
+}
+.ai-steps { display:flex; flex-direction:column; gap:10px; margin-top:20px; max-width:320px; margin-left:auto; margin-right:auto; }
+.ai-step { display:flex; align-items:center; gap:10px; font-size:13px; color:var(--text2); }
+.ai-step-dot { width:8px; height:8px; border-radius:50%; background:var(--border2); flex-shrink:0; transition:background .3s; }
+.ai-step-dot.done { background:var(--g400); }
+.ai-step-dot.active { background:var(--g300); animation:pulse 1.2s infinite; }
+
+/* Result display */
+.result-display { display:none; animation:fadeIn .4s; }
+.result-display.show { display:block; }
+.result-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--r-xl); overflow:hidden; box-shadow:var(--sh-md);
+}
+.result-card-header {
+  padding:20px 22px;
+  display:flex; align-items:center; gap:14px;
+}
+.result-icon-circle { width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.result-icon-circle i { font-size:28px; }
+.result-disease-name { font-family:var(--ff-display); font-size:20px; color:var(--text1); line-height:1.2; }
+.result-card-body { padding:16px 22px 20px; }
+
+/* Confidence bar */
+.conf-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; font-size:13px; font-weight:600; }
+.conf-track { height:10px; background:var(--bg3); border-radius:50px; overflow:hidden; margin-bottom:18px; }
+.conf-fill { height:100%; border-radius:50px; transition:width 1s cubic-bezier(.4,0,.2,1) .3s; }
+
+/* Treatment list */
+.treatment-steps { display:flex; flex-direction:column; gap:10px; }
+.treatment-step {
+  display:flex; align-items:flex-start; gap:12px;
+  background:var(--bg2); border-radius:var(--r-md); padding:13px 16px;
+  font-size:13px; line-height:1.65; color:var(--text2); transition:all .2s;
+}
+.treatment-step:hover { background:var(--g50); color:var(--text1); }
+.t-num {
+  min-width:24px; height:24px; border-radius:50%;
+  background:var(--g50); border:1.5px solid rgba(58,128,53,.25);
+  color:var(--g500); font-size:11px; font-weight:700;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;
+}
+
+/* ===== TOOLS PAGE ===== */
+.tools-page-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px,1fr)); gap:24px; }
+.tool-panel {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--r-xl); box-shadow:var(--sh-sm); overflow:hidden;
+}
+.tool-panel-header {
+  padding:20px 22px 0;
+  display:flex; align-items:center; gap:12px; margin-bottom:18px;
+}
+.tool-panel-icon { width:46px; height:46px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:24px; flex-shrink:0; }
+.tool-panel-title { font-size:17px; font-weight:700; color:var(--text1); }
+.tool-panel-desc { font-size:12px; color:var(--text3); margin-top:2px; }
+.tool-panel-body { padding:0 22px 22px; }
+
+/* Form elements */
+.form-group { margin-bottom:16px; }
+.form-label { display:block; font-size:13px; font-weight:600; color:var(--text2); margin-bottom:6px; }
+.form-input, .form-select {
+  width:100%; padding:11px 14px; border-radius:var(--r-md);
+  border:1.5px solid var(--border2); background:var(--bg2);
+  font-size:14px; font-family:var(--ff-body); color:var(--text1);
+  outline:none; transition:all .2s; appearance:none;
+}
+.form-input:focus, .form-select:focus { border-color:var(--g300); background:#fff; box-shadow:0 0 0 3px rgba(58,128,53,.1); }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.result-box {
+  background:var(--g50); border:1.5px solid rgba(58,128,53,.2);
+  border-radius:var(--r-md); padding:14px 16px; margin-top:14px; display:none;
+  animation:fadeIn .3s;
+}
+.result-box.show { display:block; }
+.result-box-title { font-size:12px; font-weight:700; color:var(--g500); text-transform:uppercase; letter-spacing:.5px; margin-bottom:8px; }
+.result-box-val { font-family:var(--ff-display); font-size:28px; color:var(--g600); }
+.result-box-unit { font-size:13px; color:var(--text3); margin-top:4px; }
+
+/* ===== KNOWLEDGE HUB ===== */
+.knowledge-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:20px; }
+.knowledge-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--r-lg); overflow:hidden; cursor:pointer;
+  transition:all .25s; box-shadow:var(--sh-sm);
+}
+.knowledge-card:hover { transform:translateY(-4px); box-shadow:var(--sh-lg); border-color:var(--g200); }
+.knowledge-card-cover {
+  height:140px; display:flex; align-items:center; justify-content:center;
+  font-size:56px; position:relative; overflow:hidden;
+}
+.knowledge-card-cover-overlay { position:absolute; inset:0; }
+.knowledge-card-body { padding:16px; }
+.knowledge-card-cat { font-size:11px; font-weight:700; color:var(--g500); letter-spacing:.6px; text-transform:uppercase; margin-bottom:6px; }
+.knowledge-card-title { font-size:15px; font-weight:700; color:var(--text1); line-height:1.4; margin-bottom:8px; }
+.knowledge-card-meta { display:flex; align-items:center; justify-content:space-between; font-size:12px; color:var(--text3); }
+
+/* ===== SEASONAL CALENDAR ===== */
+.calendar-wrap { overflow-x:auto; }
+.season-table { width:100%; border-collapse:collapse; min-width:720px; }
+.season-table th {
+  padding:12px 16px; text-align:center;
+  font-size:12px; font-weight:700; color:var(--text3); text-transform:uppercase;
+  letter-spacing:.6px; background:var(--bg2); border-bottom:2px solid var(--border);
+}
+.season-table td {
+  padding:10px 8px; border-bottom:1px solid var(--border);
+  font-size:13px; text-align:center; vertical-align:middle;
+}
+.season-table tr:hover td { background:var(--bg2); }
+.crop-name-cell { text-align:left; padding-left:16px; font-weight:700; color:var(--text1); }
+.season-block {
+  border-radius:6px; padding:4px 8px; font-size:11px; font-weight:600;
+  white-space:nowrap;
+}
+.s-plant { background:var(--g50); color:var(--g600); }
+.s-grow  { background:var(--teal-dim); color:#0a7060; }
+.s-harvest { background:var(--gold-dim); color:#8a6010; }
+.s-rest  { background:var(--bg3); color:var(--text3); }
+
+/* ===== AI CHATBOT ===== */
+.chatbot-fab {
+  position:fixed; bottom:24px; right:24px; z-index:400;
+  width:58px; height:58px; border-radius:50%;
+  background:var(--grad-green);
+  box-shadow:0 4px 20px rgba(58,128,53,.4);
+  border:none; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  font-size:26px; color:#fff;
+  transition:all .3s cubic-bezier(.22,1,.36,1);
+  animation:pulse 2.5s infinite;
+}
+.chatbot-fab:hover { transform:scale(1.1); box-shadow:0 8px 30px rgba(58,128,53,.5); }
+
+.chatbot-panel {
+  position:fixed; bottom:96px; right:24px; z-index:400;
+  width:min(370px, calc(100vw - 32px));
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--r-xl); box-shadow:var(--sh-xl);
+  display:none; flex-direction:column; overflow:hidden;
+  max-height:520px;
+  animation:scaleIn .3s cubic-bezier(.22,1,.36,1);
+  transform-origin:bottom right;
+}
+.chatbot-panel.open { display:flex; }
+.chatbot-header {
+  background:var(--grad-hero); padding:16px 18px;
+  display:flex; align-items:center; gap:12px; flex-shrink:0;
+}
+.chatbot-avatar {
+  width:40px; height:40px; border-radius:50%;
+  background:rgba(255,255,255,.15);
+  display:flex; align-items:center; justify-content:center; font-size:22px;
+}
+.chatbot-info h3 { font-size:15px; font-weight:700; color:#fff; }
+.chatbot-info p { font-size:11px; color:rgba(255,255,255,.6); display:flex; align-items:center; gap:4px; }
+.online-dot { width:6px; height:6px; border-radius:50%; background:#4ade80; display:inline-block; }
+.chatbot-close { margin-left:auto; background:none; border:none; color:rgba(255,255,255,.7); cursor:pointer; padding:6px; border-radius:8px; }
+.chatbot-close:hover { color:#fff; background:rgba(255,255,255,.1); }
+.chatbot-messages { flex:1; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:12px; }
+.chatbot-messages::-webkit-scrollbar { width:3px; }
+.chatbot-messages::-webkit-scrollbar-thumb { background:var(--border2); border-radius:3px; }
+.chat-msg { max-width:80%; animation:fadeUp .3s; }
+.chat-msg-bot { align-self:flex-start; }
+.chat-msg-user { align-self:flex-end; }
+.chat-bubble {
+  padding:10px 14px; border-radius:18px;
+  font-size:13px; line-height:1.6;
+}
+.chat-bubble-bot { background:var(--bg2); color:var(--text1); border-bottom-left-radius:4px; }
+.chat-bubble-user { background:var(--grad-green); color:#fff; border-bottom-right-radius:4px; }
+.chat-suggestions { display:flex; flex-wrap:wrap; gap:6px; padding:0 16px 12px; flex-shrink:0; }
+.chat-suggestion {
+  padding:6px 12px; border-radius:50px; font-size:12px; font-weight:600;
+  background:var(--g50); border:1px solid rgba(58,128,53,.2);
+  color:var(--g600); cursor:pointer; transition:all .2s;
+}
+.chat-suggestion:hover { background:var(--g100); }
+.chatbot-input-row {
+  padding:12px 16px; border-top:1px solid var(--border);
+  display:flex; gap:8px; flex-shrink:0;
+}
+.chatbot-input {
+  flex:1; border:1.5px solid var(--border2); border-radius:50px;
+  padding:10px 16px; font-size:13px; font-family:var(--ff-body);
+  outline:none; background:var(--bg2); color:var(--text1); transition:all .2s;
+}
+.chatbot-input:focus { border-color:var(--g300); background:#fff; }
+.chatbot-send {
+  width:38px; height:38px; border-radius:50%;
+  background:var(--grad-green); border:none;
+  color:#fff; font-size:16px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:all .2s; flex-shrink:0;
+}
+.chatbot-send:hover { transform:scale(1.08); }
+
+/* ===== ABOUT/FOOTER ===== */
+.footer {
+  background:var(--g900); padding:52px 16px 24px;
+  color:rgba(255,255,255,.6);
+}
+.footer-inner { max-width:1400px; margin:0 auto; }
+.footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px; margin-bottom:40px; }
+.footer-brand .logo-name { color:var(--g200); font-size:20px; }
+.footer-brand p { font-size:13px; line-height:1.7; margin-top:10px; color:rgba(255,255,255,.4); max-width:260px; }
+.footer-col h4 { font-size:13px; font-weight:700; color:rgba(255,255,255,.8); letter-spacing:.5px; margin-bottom:14px; }
+.footer-col ul { list-style:none; display:flex; flex-direction:column; gap:8px; }
+.footer-col li a { font-size:13px; color:rgba(255,255,255,.45); text-decoration:none; cursor:pointer; transition:color .2s; }
+.footer-col li a:hover { color:var(--g200); }
+.footer-bottom { border-top:1px solid rgba(255,255,255,.08); padding-top:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-size:12px; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width:1024px) {
+  .hero-content { grid-template-columns:1fr; }
+  .hero-visual { display:none; }
+  .topbar-nav { display:none; }
+  .hamburger { display:flex; }
+  .detector-layout { grid-template-columns:1fr; }
+  .footer-grid { grid-template-columns:1fr 1fr; }
+}
+@media (max-width:640px) {
+  .hero { padding:48px 16px 56px; min-height:auto; }
+  .hero-stats { gap:16px; }
+  .plant-grid { grid-template-columns:repeat(auto-fill, minmax(160px,1fr)); }
+  .info-grid-2 { grid-template-columns:1fr 1fr; }
+  .footer-grid { grid-template-columns:1fr; gap:28px; }
+  .topbar-search span { display:none; }
+  .form-row { grid-template-columns:1fr; }
+  .knowledge-grid { grid-template-columns:1fr; }
+  .tools-page-grid { grid-template-columns:1fr; }
+}
+@media (max-width:380px) {
+  .plant-grid { grid-template-columns:1fr 1fr; }
+  .tools-grid { grid-template-columns:repeat(2,1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== TOP NAV ===== -->
+<nav class="topbar">
+  <div class="topbar-inner">
+    <div class="logo" onclick="goPage('home')">
+      <div class="logo-mark"><i class="ti ti-plant-2"></i></div>
+      <div class="logo-text">
+        <span class="logo-name">KrishiGyan</span>
+        <span class="logo-tagline">স্মার্ট কৃষি প্ল্যাটফর্ম</span>
+      </div>
+    </div>
+    <div class="topbar-nav">
+      <button class="nav-item active" id="nav-home" onclick="goPage('home')"><i class="ti ti-home-2"></i>হোম</button>
+      <button class="nav-item" id="nav-encyclopedia" onclick="goPage('encyclopedia')"><i class="ti ti-book-2"></i>উদ্ভিদ কোষ</button>
+      <button class="nav-item" id="nav-detector" onclick="goPage('detector')"><i class="ti ti-microscope"></i>রোগ সনাক্ত</button>
+      <button class="nav-item" id="nav-tools" onclick="goPage('tools')"><i class="ti ti-tool"></i>কৃষি টুলস</button>
+      <button class="nav-item" id="nav-knowledge" onclick="goPage('knowledge')"><i class="ti ti-bulb"></i>জ্ঞান কেন্দ্র</button>
+      <button class="nav-item" id="nav-calendar" onclick="goPage('calendar')"><i class="ti ti-calendar"></i>মৌসুম ক্যালেন্ডার</button>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <div class="topbar-search" onclick="openSearch()">
+        <i class="ti ti-search"></i>
+        <span>খুঁজুন...</span>
+      </div>
+      <button class="hamburger" id="hamburger" onclick="toggleMobileNav()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== MOBILE NAV ===== -->
+<div class="mobile-nav" id="mobile-nav">
+  <div class="mobile-nav-backdrop" onclick="closeMobileNav()"></div>
+  <div class="mobile-nav-panel">
+    <div class="mobile-nav-header">
+      <div class="mobile-nav-logo">🌿 KrishiGyan</div>
+      <button class="mobile-nav-close" onclick="closeMobileNav()"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="mobile-nav-links">
+      <button class="mobile-nav-item" onclick="goPage('home');closeMobileNav()"><i class="ti ti-home-2"></i>হোম</button>
+      <button class="mobile-nav-item" onclick="goPage('encyclopedia');closeMobileNav()"><i class="ti ti-book-2"></i>উদ্ভিদ বিশ্বকোষ</button>
+      <button class="mobile-nav-item" onclick="goPage('detector');closeMobileNav()"><i class="ti ti-microscope"></i>রোগ সনাক্তকারী</button>
+      <button class="mobile-nav-item" onclick="goPage('tools');closeMobileNav()"><i class="ti ti-tool"></i>কৃষি টুলস</button>
+      <button class="mobile-nav-item" onclick="goPage('knowledge');closeMobileNav()"><i class="ti ti-bulb"></i>জ্ঞান কেন্দ্র</button>
+      <button class="mobile-nav-item" onclick="goPage('calendar');closeMobileNav()"><i class="ti ti-calendar"></i>মৌসুম ক্যালেন্ডার</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SEARCH MODAL ===== -->
+<div class="search-modal" id="search-modal">
+  <div class="search-modal-box">
+    <div class="search-input-row">
+      <i class="ti ti-search"></i>
+      <input class="search-modal-input" id="search-input" placeholder="গাছ, রোগ, চাষ পদ্ধতি খুঁজুন..." oninput="handleSearch(this.value)" autofocus>
+      <button class="search-close" onclick="closeSearch()"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="search-results" id="search-results"></div>
+  </div>
+</div>
+
+<!-- ===== PAGES ===== -->
+
+<!-- ==================== HOME PAGE ==================== -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <div class="hero" id="hero-home">
+    <div class="hero-bg-circles">
+      <div class="hero-circle hero-circle-1"></div>
+      <div class="hero-circle hero-circle-2"></div>
+      <div class="hero-circle hero-circle-3"></div>
+    </div>
+    <div class="hero-content content">
+      <div class="hero-text">
+        <div class="hero-eyebrow"><i class="ti ti-sparkles"></i>বাংলাদেশের প্রথম স্মার্ট কৃষি প্ল্যাটফর্ম</div>
+        <h1 class="hero-title">ফসলের যত্ন নিন<br><em>প্রযুক্তির সাথে</em></h1>
+        <p class="hero-sub">১০০০+ উদ্ভিদ তথ্য, AI রোগ সনাক্তকারী, কৃষি টুলস এবং সম্পূর্ণ জ্ঞানভান্ডার — একটিই প্ল্যাটফর্মে।</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary btn-lg" onclick="goPage('encyclopedia')"><i class="ti ti-book-2"></i>উদ্ভিদ কোষ দেখুন</button>
+          <button class="btn btn-gold btn-lg" onclick="goPage('detector')"><i class="ti ti-microscope"></i>রোগ সনাক্ত করুন</button>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat-item"><div class="hero-stat-num">১০০০+</div><div class="hero-stat-lbl">উদ্ভিদ প্রজাতি</div></div>
+          <div class="hero-stat-item"><div class="hero-stat-num">৫০+</div><div class="hero-stat-lbl">রোগ শনাক্তকরণ</div></div>
+          <div class="hero-stat-item"><div class="hero-stat-num">২০+</div><div class="hero-stat-lbl">কৃষি টুলস</div></div>
+          <div class="hero-stat-item"><div class="hero-stat-num">৫০০+</div><div class="hero-stat-lbl">গাইড ও নিবন্ধ</div></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-cards-grid">
+          <div class="hero-mini-card" onclick="goPage('encyclopedia')">
+            <div class="hero-mini-card-icon" style="background:rgba(92,200,58,.15);">🌾</div>
+            <div class="hero-mini-card-title">উদ্ভিদ বিশ্বকোষ</div>
+            <div class="hero-mini-card-desc">১০০০+ গাছের বিস্তারিত তথ্য</div>
+          </div>
+          <div class="hero-mini-card" onclick="goPage('detector')">
+            <div class="hero-mini-card-icon" style="background:rgba(212,160,23,.15);">🔬</div>
+            <div class="hero-mini-card-title">AI রোগ সনাক্ত</div>
+            <div class="hero-mini-card-desc">ছবি তুলুন, রোগ জানুন</div>
+          </div>
+          <div class="hero-mini-card" onclick="goPage('tools')">
+            <div class="hero-mini-card-icon" style="background:rgba(26,171,138,.15);">🧮</div>
+            <div class="hero-mini-card-title">কৃষি টুলস</div>
+            <div class="hero-mini-card-desc">Calculator ও Estimator</div>
+          </div>
+          <div class="hero-mini-card" onclick="goPage('calendar')">
+            <div class="hero-mini-card-icon" style="background:rgba(214,74,46,.15);">📅</div>
+            <div class="hero-mini-card-title">মৌসুম ক্যালেন্ডার</div>
+            <div class="hero-mini-card-desc">বপন ও ফসল কাটার সময়</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS STRIP -->
+  <div class="stats-strip">
+    <div class="stats-strip-inner">
+      <div class="stat-block"><div class="stat-block-num">১২,৪৮০+</div><div class="stat-block-label">সক্রিয় কৃষক</div></div>
+      <div class="stat-block"><div class="stat-block-num">৯৫.৮%</div><div class="stat-block-label">রোগ সনাক্তের নির্ভুলতা</div></div>
+      <div class="stat-block"><div class="stat-block-num">১,২৪৩</div><div class="stat-block-label">উদ্ভিদ প্রজাতি</div></div>
+      <div class="stat-block"><div class="stat-block-num">৬৪টি</div><div class="stat-block-label">জেলায় সেবা</div></div>
+      <div class="stat-block"><div class="stat-block-num">৩৮+</div><div class="stat-block-label">কৃষি বিশেষজ্ঞ</div></div>
+      <div class="stat-block"><div class="stat-block-num">৫০০+</div><div class="stat-block-label">সাফল্যের গল্প</div></div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- QUICK TOOLS -->
+    <div class="section-sm">
+      <div class="section-head">
+        <div class="section-eyebrow"><i class="ti ti-bolt"></i>দ্রুত অ্যাক্সেস</div>
+        <h2 class="section-title">প্রয়োজনীয় কৃষি টুলস</h2>
+        <p class="section-sub">সরাসরি আপনার দরকারি টুলে যান</p>
+      </div>
+      <div class="tools-grid">
+        <div class="tool-card" onclick="goPage('tools');switchTool('fertilizer')">
+          <div class="tool-card-icon" style="background:var(--g50);color:var(--g400);">🧪</div>
+          <div class="tool-card-title">সার ক্যালকুলেটর</div>
+          <div class="tool-card-desc">সঠিক পরিমাণ সার নির্ধারণ</div>
+        </div>
+        <div class="tool-card" onclick="goPage('tools');switchTool('water')">
+          <div class="tool-card-icon" style="background:var(--teal-dim);color:var(--teal);">💧</div>
+          <div class="tool-card-title">সেচ ক্যালকুলেটর</div>
+          <div class="tool-card-desc">পানির পরিমাণ হিসাব করুন</div>
+        </div>
+        <div class="tool-card" onclick="goPage('tools');switchTool('profit')">
+          <div class="tool-card-icon" style="background:var(--gold-dim);color:var(--gold);">💰</div>
+          <div class="tool-card-title">মুনাফা ক্যালকুলেটর</div>
+          <div class="tool-card-desc">ফসল চাষের লাভ-ক্ষতি</div>
+        </div>
+        <div class="tool-card" onclick="goPage('tools');switchTool('yield')">
+          <div class="tool-card-icon" style="background:rgba(26,171,138,.1);color:var(--teal);">📊</div>
+          <div class="tool-card-title">ফলন অনুমানকারী</div>
+          <div class="tool-card-desc">প্রত্যাশিত ফলন হিসাব</div>
+        </div>
+        <div class="tool-card" onclick="goPage('tools');switchTool('recommend')">
+          <div class="tool-card-icon" style="background:var(--amb-dim);color:var(--amb);">🌱</div>
+          <div class="tool-card-title">ফসল পরামর্শ</div>
+          <div class="tool-card-desc">জমি অনুযায়ী ফসল বাছাই</div>
+        </div>
+        <div class="tool-card" onclick="goPage('tools');switchTool('harvest')">
+          <div class="tool-card-icon" style="background:var(--red-dim);color:var(--red);">🌾</div>
+          <div class="tool-card-title">ফসল কাটার সময়</div>
+          <div class="tool-card-desc">সঠিক সময় নির্ধারণ</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEATURED PLANTS -->
+    <div class="section-sm">
+      <div class="section-head flex justify-between items-center" style="flex-wrap:wrap;gap:12px;">
+        <div>
+          <div class="section-eyebrow"><i class="ti ti-star"></i>বিশেষ উদ্ভিদ</div>
+          <h2 class="section-title">আজকের বৈশিষ্ট্যময় গাছ</h2>
+        </div>
+        <button class="btn btn-outline btn-sm" onclick="goPage('encyclopedia')">সব দেখুন <i class="ti ti-arrow-right"></i></button>
+      </div>
+      <div class="plant-grid" id="featured-plants-grid"></div>
+    </div>
+
+    <!-- KNOWLEDGE HIGHLIGHTS -->
+    <div class="section-sm">
+      <div class="section-head flex justify-between items-center" style="flex-wrap:wrap;gap:12px;">
+        <div>
+          <div class="section-eyebrow"><i class="ti ti-book"></i>জ্ঞান কেন্দ্র</div>
+          <h2 class="section-title">কৃষি গাইড ও নিবন্ধ</h2>
+        </div>
+        <button class="btn btn-outline btn-sm" onclick="goPage('knowledge')">আরও দেখুন <i class="ti ti-arrow-right"></i></button>
+      </div>
+      <div class="knowledge-grid" id="home-knowledge-grid"></div>
+    </div>
+
+    <!-- PLANT OF THE DAY -->
+    <div class="section-sm">
+      <div class="section-head"><div class="section-eyebrow"><i class="ti ti-sun"></i>আজকের গাছ</div></div>
+      <div id="plant-of-day-card" style="border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--sh-lg);cursor:pointer;" onclick="openPlant(PLANT_OF_DAY)"></div>
+    </div>
+
+  </div><!-- /content -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo" style="margin-bottom:12px;">
+            <div class="logo-mark"><i class="ti ti-plant-2"></i></div>
+            <div class="logo-text"><span class="logo-name" style="color:var(--g200);font-family:var(--ff-display);font-size:18px;">KrishiGyan</span></div>
+          </div>
+          <p>বাংলাদেশের কৃষকদের জন্য তৈরি স্মার্ট কৃষি প্ল্যাটফর্ম। আধুনিক প্রযুক্তি দিয়ে কৃষিকে সহজ ও লাভজনক করাই আমাদের লক্ষ্য।</p>
+        </div>
+        <div class="footer-col">
+          <h4>প্ল্যাটফর্ম</h4>
+          <ul>
+            <li><a onclick="goPage('encyclopedia')">উদ্ভিদ বিশ্বকোষ</a></li>
+            <li><a onclick="goPage('detector')">রোগ সনাক্তকারী</a></li>
+            <li><a onclick="goPage('tools')">কৃষি টুলস</a></li>
+            <li><a onclick="goPage('calendar')">মৌসুম ক্যালেন্ডার</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>জ্ঞান কেন্দ্র</h4>
+          <ul>
+            <li><a onclick="goPage('knowledge')">চাষ পদ্ধতি</a></li>
+            <li><a onclick="goPage('knowledge')">জৈব কৃষি</a></li>
+            <li><a onclick="goPage('knowledge')">সেচ ব্যবস্থাপনা</a></li>
+            <li><a onclick="goPage('knowledge')">কীটনাশক গাইড</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>সাহায্য</h4>
+          <ul>
+            <li><a>FAQ</a></li>
+            <li><a>যোগাযোগ</a></li>
+            <li><a>ফিডব্যাক</a></li>
+            <li><a>API ডকুমেন্টেশন</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© ২০২৫ KrishiGyan · বাংলাদেশ 🇧🇩</span>
+        <span>কৃষকদের জন্য তৈরি, ভালোবাসা দিয়ে</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- #page-home -->
+
+
+<!-- ==================== ENCYCLOPEDIA PAGE ==================== -->
+<div class="page" id="page-encyclopedia">
+  <div style="background:var(--grad-hero);padding:40px 16px 32px;">
+    <div class="content">
+      <div class="section-eyebrow" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.8);margin-bottom:16px;"><i class="ti ti-book-2"></i>উদ্ভিদ বিশ্বকোষ</div>
+      <h1 class="hero-title" style="font-size:clamp(26px,5vw,42px);margin-bottom:14px;">১০০০+ উদ্ভিদের সম্পূর্ণ তথ্য</h1>
+      <div style="display:flex;gap:10px;max-width:500px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:50px;padding:10px 18px;align-items:center;">
+        <i class="ti ti-search" style="color:rgba(255,255,255,.6);font-size:18px;"></i>
+        <input id="plant-search-input" placeholder="গাছের নাম বা বৈজ্ঞানিক নাম লিখুন..." oninput="filterPlants(this.value)"
+          style="flex:1;border:none;background:transparent;outline:none;font-size:15px;color:#fff;font-family:var(--ff-body);"
+        >
+      </div>
+    </div>
+  </div>
+  <div class="content section-sm">
+    <div class="plant-filters" id="plant-category-filters">
+      <button class="filter-pill active" data-cat="all" onclick="setCat(this,'all')">সব</button>
+      <button class="filter-pill" data-cat="grain" onclick="setCat(this,'grain')">🌾 শস্য</button>
+      <button class="filter-pill" data-cat="vegetable" onclick="setCat(this,'vegetable')">🥦 সবজি</button>
+      <button class="filter-pill" data-cat="fruit" onclick="setCat(this,'fruit')">🍋 ফল</button>
+      <button class="filter-pill" data-cat="spice" onclick="setCat(this,'spice')">🌿 মশলা</button>
+      <button class="filter-pill" data-cat="medicinal" onclick="setCat(this,'medicinal')">💊 ঔষধি</button>
+      <button class="filter-pill" data-cat="flower" onclick="setCat(this,'flower')">🌸 ফুল</button>
+      <button class="filter-pill" data-cat="tree" onclick="setCat(this,'tree')">🌳 বৃক্ষ</button>
+      <button class="filter-pill" data-cat="cash" onclick="setCat(this,'cash')">💰 অর্থকরী</button>
+    </div>
+    <div class="plant-grid" id="encyclopedia-grid"></div>
+    <div style="text-align:center;margin-top:28px;">
+      <button class="btn btn-outline" id="load-more-btn" onclick="loadMorePlants()"><i class="ti ti-refresh"></i>আরও দেখুন</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PLANT DETAIL PAGE ==================== -->
+<div class="page" id="page-plant-detail">
+  <div class="plant-detail-hero">
+    <div class="content">
+      <button class="plant-detail-back" onclick="goPage('encyclopedia')"><i class="ti ti-arrow-left"></i>বিশ্বকোষে ফিরুন</button>
+      <div class="plant-detail-top">
+        <div>
+          <div class="plant-detail-tags" id="pd-tags" style="margin-bottom:16px;"></div>
+          <div id="pd-names"></div>
+        </div>
+        <div class="plant-detail-emoji" id="pd-emoji">🌿</div>
+      </div>
+    </div>
+  </div>
+  <div class="content plant-detail-content">
+    <div class="tabs" id="pd-tabs">
+      <button class="tab-btn active" onclick="switchTab('overview')"><i class="ti ti-info-circle"></i>সংক্ষিপ্ত</button>
+      <button class="tab-btn" onclick="switchTab('cultivation')"><i class="ti ti-trowel"></i>চাষ পদ্ধতি</button>
+      <button class="tab-btn" onclick="switchTab('disease')"><i class="ti ti-virus"></i>রোগ ও পোকা</button>
+      <button class="tab-btn" onclick="switchTab('nutrition')"><i class="ti ti-salad"></i>পুষ্টিগুণ</button>
+      <button class="tab-btn" onclick="switchTab('market')"><i class="ti ti-currency-taka"></i>বাজার তথ্য</button>
+    </div>
+
+    <div class="tab-panel active" id="tab-overview">
+      <div class="info-grid-2" id="pd-overview-grid"></div>
+      <div style="margin-top:24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:20px;" id="pd-desc-box"></div>
+      <div style="margin-top:20px;" id="pd-requirements"></div>
+    </div>
+
+    <div class="tab-panel" id="tab-cultivation">
+      <div id="pd-cultivation-content"></div>
+    </div>
+
+    <div class="tab-panel" id="tab-disease">
+      <div id="pd-disease-content"></div>
+    </div>
+
+    <div class="tab-panel" id="tab-nutrition">
+      <div id="pd-nutrition-content"></div>
+    </div>
+
+    <div class="tab-panel" id="tab-market">
+      <div id="pd-market-content"></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ==================== DETECTOR PAGE ==================== -->
+<div class="page" id="page-detector">
+  <div style="background:var(--grad-hero);padding:40px 16px 32px;">
+    <div class="content">
+      <div class="section-eyebrow" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.8);margin-bottom:14px;"><i class="ti ti-microscope"></i>AI রোগ সনাক্তকারী</div>
+      <h1 class="hero-title" style="font-size:clamp(24px,4vw,38px);margin-bottom:10px;">ফসলের রোগ চিনুন <em>তাৎক্ষণিক</em></h1>
+      <p style="color:rgba(255,255,255,.65);font-size:15px;max-width:500px;">গাছের পাতা বা ফলের ছবি আপলোড করুন — AI বিশ্লেষণ করে রোগের নাম, কারণ ও চিকিৎসা জানাবে।</p>
+    </div>
+  </div>
+  <div class="content section-sm">
+    <div class="detector-layout">
+      <!-- Left: Upload -->
+      <div>
+        <div class="upload-zone" id="upload-zone" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event)">
+          <input type="file" accept="image/*" onchange="handleDetectorFile(event)">
+          <div class="upload-icon" id="upload-icon"><i class="ti ti-cloud-upload" style="font-size:32px;"></i></div>
+          <div class="upload-title" id="upload-title">ছবি আপলোড করুন</div>
+          <div class="upload-sub">JPG, PNG বা WEBP · সর্বোচ্চ ১০MB<br>ছবি টেনে আনুন বা ক্লিক করুন</div>
+        </div>
+
+        <!-- Preview -->
+        <div class="preview-section" id="preview-section">
+          <div class="img-preview-wrap">
+            <img id="det-preview-img" src="" alt="preview" style="width:100%;max-height:280px;object-fit:cover;border-radius:var(--r-lg);display:block;">
+            <div class="img-preview-scan" id="scan-line"></div>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:12px;">
+            <button class="btn btn-primary" id="analyze-btn" onclick="startDetection()" style="flex:1;"><i class="ti ti-microscope"></i>বিশ্লেষণ করুন</button>
+            <button class="btn btn-ghost" onclick="resetDetector()"><i class="ti ti-refresh"></i></button>
+          </div>
+        </div>
+
+        <!-- Processing -->
+        <div class="ai-processing" id="ai-processing">
+          <div class="ai-spinner"></div>
+          <p style="font-size:14px;font-weight:700;color:var(--text1);margin-bottom:4px;">AI বিশ্লেষণ চলছে...</p>
+          <p id="ai-process-step" style="font-size:13px;color:var(--g400);font-weight:500;margin-bottom:20px;">ছবির প্যাটার্ন বিশ্লেষণ হচ্ছে</p>
+          <div class="ai-steps">
+            <div class="ai-step"><div class="ai-step-dot active" id="astep-0"></div><span>ছবি প্রি-প্রসেসিং</span></div>
+            <div class="ai-step"><div class="ai-step-dot" id="astep-1"></div><span>পাতার বৈশিষ্ট্য বিশ্লেষণ</span></div>
+            <div class="ai-step"><div class="ai-step-dot" id="astep-2"></div><span>রোগ প্যাটার্ন মিলানো</span></div>
+            <div class="ai-step"><div class="ai-step-dot" id="astep-3"></div><span>চিকিৎসা পরামর্শ তৈরি</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Tips + Result -->
+      <div>
+        <div id="detection-result" class="result-display"><!-- filled by JS --></div>
+
+        <div id="detector-tips-card" class="card" style="padding:22px;">
+          <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px;"><i class="ti ti-bulb" style="color:var(--gold);"></i>সেরা ফলাফলের টিপস</h3>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;gap:10px;font-size:13px;color:var(--text2);">
+              <i class="ti ti-check" style="color:var(--g400);font-size:16px;flex-shrink:0;margin-top:2px;"></i>
+              <span>আক্রান্ত পাতার উপরের অংশ ফ্রেমে রাখুন</span>
+            </div>
+            <div style="display:flex;gap:10px;font-size:13px;color:var(--text2);">
+              <i class="ti ti-check" style="color:var(--g400);font-size:16px;flex-shrink:0;margin-top:2px;"></i>
+              <span>প্রাকৃতিক আলোতে স্পষ্ট ছবি তুলুন</span>
+            </div>
+            <div style="display:flex;gap:10px;font-size:13px;color:var(--text2);">
+              <i class="ti ti-check" style="color:var(--g400);font-size:16px;flex-shrink:0;margin-top:2px;"></i>
+              <span>একটি পাতার একাধিক ছবি তুলুন</span>
+            </div>
+            <div style="display:flex;gap:10px;font-size:13px;color:var(--text2);">
+              <i class="ti ti-check" style="color:var(--g400);font-size:16px;flex-shrink:0;margin-top:2px;"></i>
+              <span>ছবি ঝাপসা বা অন্ধকার না হলে ভালো</span>
+            </div>
+          </div>
+          <div style="margin-top:20px;background:var(--g50);border-radius:var(--r-md);padding:14px;">
+            <p style="font-size:12px;font-weight:700;color:var(--g500);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px;">সনাক্তযোগ্য রোগসমূহ</p>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;" id="disease-chips"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ==================== TOOLS PAGE ==================== -->
+<div class="page" id="page-tools">
+  <div style="background:var(--grad-hero);padding:40px 16px 32px;">
+    <div class="content">
+      <div class="section-eyebrow" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.8);margin-bottom:14px;"><i class="ti ti-tool"></i>কৃষি টুলস</div>
+      <h1 class="hero-title" style="font-size:clamp(24px,4vw,38px);margin-bottom:10px;">স্মার্ট কৃষি <em>ক্যালকুলেটর</em></h1>
+      <p style="color:rgba(255,255,255,.65);font-size:15px;max-width:480px;">সঠিক সিদ্ধান্ত নিন — সার, সেচ, মুনাফা ও ফলন হিসাব করুন।</p>
+    </div>
+  </div>
+  <div class="content section-sm">
+    <div class="tools-page-grid" id="tools-page-grid"></div>
+  </div>
+</div>
+
+
+<!-- ==================== KNOWLEDGE PAGE ==================== -->
+<div class="page" id="page-knowledge">
+  <div style="background:var(--grad-hero);padding:40px 16px 32px;">
+    <div class="content">
+      <div class="section-eyebrow" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.8);margin-bottom:14px;"><i class="ti ti-book"></i>জ্ঞান কেন্দ্র</div>
+      <h1 class="hero-title" style="font-size:clamp(24px,4vw,38px);margin-bottom:10px;">কৃষি <em>গাইড ও নিবন্ধ</em></h1>
+      <p style="color:rgba(255,255,255,.65);font-size:15px;max-width:480px;">চাষ পদ্ধতি, জৈব কৃষি, সেচ ব্যবস্থাপনা এবং আরও অনেক বিষয়ে বিস্তারিত তথ্য।</p>
+    </div>
+  </div>
+  <div class="content section-sm">
+    <div class="plant-filters" id="knowledge-filters">
+      <button class="filter-pill active" onclick="filterKnowledge(this,'all')">সব গাইড</button>
+      <button class="filter-pill" onclick="filterKnowledge(this,'cultivation')">চাষ পদ্ধতি</button>
+      <button class="filter-pill" onclick="filterKnowledge(this,'organic')">জৈব কৃষি</button>
+      <button class="filter-pill" onclick="filterKnowledge(this,'pest')">কীটপতঙ্গ</button>
+      <button class="filter-pill" onclick="filterKnowledge(this,'irrigation')">সেচ</button>
+      <button class="filter-pill" onclick="filterKnowledge(this,'fertilizer')">সার</button>
+      <button class="filter-pill" onclick="filterKnowledge(this,'tech')">স্মার্ট ফার্মিং</button>
+    </div>
+    <div class="knowledge-grid" id="knowledge-main-grid"></div>
+  </div>
+</div>
+
+
+<!-- ==================== CALENDAR PAGE ==================== -->
+<div class="page" id="page-calendar">
+  <div style="background:var(--grad-hero);padding:40px 16px 32px;">
+    <div class="content">
+      <div class="section-eyebrow" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.8);margin-bottom:14px;"><i class="ti ti-calendar"></i>মৌসুম ক্যালেন্ডার</div>
+      <h1 class="hero-title" style="font-size:clamp(24px,4vw,38px);margin-bottom:10px;">বাংলাদেশের <em>ফসল ক্যালেন্ডার</em></h1>
+      <p style="color:rgba(255,255,255,.65);font-size:15px;max-width:500px;">বপন থেকে ফসল কাটা পর্যন্ত — প্রতিটি ফসলের সঠিক সময় জানুন।</p>
+    </div>
+  </div>
+  <div class="content section-sm">
+    <!-- Legend -->
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;">
+      <div style="display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;">
+        <div style="width:28px;height:12px;border-radius:6px;background:var(--g50);border:1px solid rgba(58,128,53,.3);"></div>বপন
+      </div>
+      <div style="display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;">
+        <div style="width:28px;height:12px;border-radius:6px;background:var(--teal-dim);border:1px solid rgba(26,171,138,.3);"></div>বৃদ্ধি
+      </div>
+      <div style="display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;">
+        <div style="width:28px;height:12px;border-radius:6px;background:var(--gold-dim);border:1px solid var(--gold-border);"></div>ফসল কাটা
+      </div>
+    </div>
+    <div class="card" style="padding:0;overflow:hidden;">
+      <div class="calendar-wrap">
+        <table class="season-table" id="season-table"></table>
+      </div>
+    </div>
+    <!-- Crop cards below -->
+    <div style="margin-top:32px;">
+      <h3 style="font-family:var(--ff-display);font-size:22px;margin-bottom:20px;">গুরুত্বপূর্ণ ফসলের মৌসুম তথ্য</h3>
+      <div class="plant-grid" id="season-info-grid"></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== AI CHATBOT ===== -->
+<button class="chatbot-fab" id="chatbot-fab" onclick="toggleChat()">🤖</button>
+<div class="chatbot-panel" id="chatbot-panel">
+  <div class="chatbot-header">
+    <div class="chatbot-avatar">🌾</div>
+    <div class="chatbot-info">
+      <h3>KrishiBot</h3>
+      <p><span class="online-dot"></span>সক্রিয় · কৃষি বিশেষজ্ঞ AI</p>
+    </div>
+    <button class="chatbot-close" onclick="toggleChat()"><i class="ti ti-x"></i></button>
+  </div>
+  <div class="chatbot-messages" id="chat-messages">
+    <div class="chat-msg chat-msg-bot">
+      <div class="chat-bubble chat-bubble-bot">নমস্কার! 👋 আমি KrishiBot। আপনার ফসল ও কৃষি সম্পর্কে যেকোনো প্রশ্ন করুন।</div>
+    </div>
+  </div>
+  <div class="chat-suggestions" id="chat-suggestions">
+    <div class="chat-suggestion" onclick="sendChat('ধানের রোগ কী কী?')">ধানের রোগ</div>
+    <div class="chat-suggestion" onclick="sendChat('টমেটো চাষ পদ্ধতি?')">টমেটো চাষ</div>
+    <div class="chat-suggestion" onclick="sendChat('সেচ কখন দেব?')">সেচ সময়</div>
+    <div class="chat-suggestion" onclick="sendChat('জৈব সার কীভাবে বানাব?')">জৈব সার</div>
+  </div>
+  <div class="chatbot-input-row">
+    <input class="chatbot-input" id="chat-input" placeholder="প্রশ্ন লিখুন..." onkeydown="if(event.key==='Enter')sendChatInput()">
+    <button class="chatbot-send" onclick="sendChatInput()"><i class="ti ti-send"></i></button>
+  </div>
+</div>
+
+
+<!-- ===================================================================
+     JAVASCRIPT DATA + LOGIC
+==================================================================== -->
+<script>
+/* ================================================================
+   PLANT DATABASE (40 plants, expandable to 1000+)
+================================================================ */
+const PLANTS = [
+  { id:'rice', name:'ধান', eng:'Rice', sci:'Oryza sativa', cat:'grain', emoji:'🌾',
+    bgGrad:'linear-gradient(135deg,#c8e6b0,#a5d688)', desc:'বাংলাদেশের প্রধান খাদ্যশস্য। সমগ্র দেশের ৭০% মানুষের প্রধান খাদ্য। বোরো, আমন ও আউশ মৌসুমে চাষ হয়।',
+    climate:'ক্রান্তীয়', soil:'এঁটেল দোআঁশ', water:'বেশি (প্রতিদিন)', sun:'পূর্ণ রোদ', temp:'22-30°C',
+    plantSeason:'জুন-জুলাই (আমন), ডিসেম্বর (বোরো)', harvestSeason:'নভেম্বর-ডিসেম্বর',
+    growDays:120, yield:'৪-৬ টন/হেক্টর', difficulty:2,
+    diseases:['ব্লাস্ট রোগ','বাদামি দাগ','শিথ ব্লাইট','ব্যাকটেরিয়াল লিফ ব্লাইট'],
+    treatments:['Tricyclazole ছত্রাকনাশক স্প্রে','পরিষ্কার বীজ ব্যবহার','সঠিক দূরত্বে রোপণ'],
+    nutrition:'কার্বোহাইড্রেট ৭৮%, প্রোটিন ৭%, আয়রন, ভিটামিন B', marketVal:'৳৩৫-৪৫/কেজি',
+    steps:['জমি প্রস্তুত','বীজতলা তৈরি','চারা রোপণ','সার ও সেচ','আগাছা দমন','ফসল কাটা'],
+    tags:['খাদ্যশস্য','বাণিজ্যিক','পানি-প্রিয়'],
+    facts:'বাংলাদেশ বিশ্বের ৩য় বৃহত্তম ধান উৎপাদনকারী দেশ।'
+  },
+  { id:'mango', name:'আম', eng:'Mango', sci:'Mangifera indica', cat:'fruit', emoji:'🥭',
+    bgGrad:'linear-gradient(135deg,#ffe0a0,#ffb74d)', desc:'আমের রাজা। বাংলাদেশের জাতীয় ফল। রাজশাহী ও চাঁপাই নবাবগঞ্জ বিখ্যাত আমের জন্য।',
+    climate:'উষ্ণ ক্রান্তীয়', soil:'দোআঁশ থেকে বেলে দোআঁশ', water:'মাঝারি', sun:'পূর্ণ রোদ', temp:'24-30°C',
+    plantSeason:'জুন-আগস্ট', harvestSeason:'মে-জুলাই',
+    growDays:90, yield:'৩-১০ টন/হেক্টর', difficulty:2,
+    diseases:['অ্যান্থ্রাকনোজ','পাউডারি মিলডিউ','মালফর্মেশন','ডাইব্যাক'],
+    treatments:['Carbendazim স্প্রে','নিম তেল ব্যবহার','আক্রান্ত ডাল কাটা'],
+    nutrition:'ভিটামিন A, C, ভিটামিন B6, ফাইবার, পটাশিয়াম',
+    marketVal:'৳৬০-১৫০/কেজি', steps:['জমি প্রস্তুত','কলম রোপণ','সেচ ও সার','ছাঁটাই','ফলের পরিচর্যা','ফসল সংগ্রহ'],
+    tags:['জাতীয় ফল','বাণিজ্যিক','উষ্ণ-প্রিয়'],
+    facts:'আম প্রায় ৪০০০ বছর ধরে উপমহাদেশে চাষ হচ্ছে।'
+  },
+  { id:'jute', name:'পাট', eng:'Jute', sci:'Corchorus capsularis', cat:'cash', emoji:'🌿',
+    bgGrad:'linear-gradient(135deg,#d4edda,#a8d5b8)', desc:'বাংলাদেশের সোনালি আঁশ। বিশ্বের মোট পাট উৎপাদনের প্রায় ৩০% বাংলাদেশে হয়।',
+    climate:'উষ্ণ আর্দ্র', soil:'দোআঁশ', water:'বেশি', sun:'পূর্ণ রোদ', temp:'25-38°C',
+    plantSeason:'মার্চ-এপ্রিল', harvestSeason:'জুলাই-আগস্ট',
+    growDays:120, yield:'২-৩ টন/হেক্টর', difficulty:2,
+    diseases:['স্টেম রট','লিফ স্পট','ডাম্পিং অফ'],
+    treatments:['বীজ শোধন','সঠিক পানি নিষ্কাশন','রোটেশন চাষ'],
+    nutrition:'— (খাদ্য নয়, শিল্প কাঁচামাল)', marketVal:'৳২৫০০-৩৫০০/মণ',
+    steps:['বীজ শোধন','বপন','পাতলা করা','জলাবদ্ধতা এড়ানো','কাটা','পচানো ও ছাড়ানো'],
+    tags:['অর্থকরী ফসল','রপ্তানি','পরিবেশবান্ধব'],
+    facts:'পাটকে "সোনালি আঁশ" বলা হয়।'
+  },
+  { id:'potato', name:'আলু', eng:'Potato', sci:'Solanum tuberosum', cat:'vegetable', emoji:'🥔',
+    bgGrad:'linear-gradient(135deg,#f5e6c8,#e8d0a0)', desc:'বাংলাদেশের সবচেয়ে গুরুত্বপূর্ণ সবজি ফসল। শীতকালীন ফসল হিসেবে ব্যাপকভাবে চাষ হয়।',
+    climate:'নাতিশীতোষ্ণ', soil:'দোআঁশ বেলে মাটি', water:'মাঝারি', sun:'পূর্ণ রোদ', temp:'15-20°C',
+    plantSeason:'অক্টোবর-ডিসেম্বর', harvestSeason:'ফেব্রুয়ারি-মার্চ',
+    growDays:90, yield:'২০-৩০ টন/হেক্টর', difficulty:1,
+    diseases:['লেট ব্লাইট','আর্লি ব্লাইট','ব্যাকটেরিয়াল উইল্ট'],
+    treatments:['Metalaxyl ছত্রাকনাশক','সুস্থ বীজআলু ব্যবহার','ফসল চক্র'],
+    nutrition:'কার্বোহাইড্রেট, ভিটামিন C, পটাশিয়াম, ফাইবার', marketVal:'৳১৫-৩০/কেজি',
+    steps:['বীজআলু কাটা','শোধন','রোপণ','মাটি দেওয়া','সার ও সেচ','তোলা'],
+    tags:['শীতকালীন','সবজি','বাণিজ্যিক'],
+    facts:'বাংলাদেশ বিশ্বের ৭ম বৃহত্তম আলু উৎপাদনকারী।'
+  },
+  { id:'tomato', name:'টমেটো', eng:'Tomato', sci:'Solanum lycopersicum', cat:'vegetable', emoji:'🍅',
+    bgGrad:'linear-gradient(135deg,#ffccb0,#ff8a65)', desc:'পুষ্টিগুণে ভরপুর একটি জনপ্রিয় সবজি। শীতকালে বেশি উৎপাদন হয় কিন্তু সারাবছর চাষযোগ্য।',
+    climate:'নাতিশীতোষ্ণ', soil:'দোআঁশ', water:'নিয়মিত', sun:'পূর্ণ রোদ', temp:'18-27°C',
+    plantSeason:'সেপ্টেম্বর-অক্টোবর', harvestSeason:'ডিসেম্বর-মার্চ',
+    growDays:80, yield:'৩০-৫০ টন/হেক্টর', difficulty:2,
+    diseases:['লিফ কার্ল ভাইরাস','ফুসারিয়াম উইল্ট','আর্লি ব্লাইট'],
+    treatments:['ভাইরাস-প্রতিরোধী জাত','নিম স্প্রে','সঠিক সেচ'],
+    nutrition:'ভিটামিন C, A, লাইকোপিন, পটাশিয়াম', marketVal:'৳৩০-৮০/কেজি',
+    steps:['বীজতলা','চারা রোপণ','মাচা তৈরি','সার','ফুল ও ফলের পরিচর্যা','সংগ্রহ'],
+    tags:['সবজি','পুষ্টিকর','শীতকালীন'],
+    facts:'টমেটো আসলে একটি ফল, বৈজ্ঞানিকভাবে।'
+  },
+  { id:'banana', name:'কলা', eng:'Banana', sci:'Musa acuminata', cat:'fruit', emoji:'🍌',
+    bgGrad:'linear-gradient(135deg,#fff9c4,#f9e060)', desc:'বাংলাদেশের অন্যতম প্রধান ফল। সারাবছর পাওয়া যায় এবং সস্তা পুষ্টির উৎস।',
+    climate:'ক্রান্তীয়', soil:'দোআঁশ', water:'বেশি', sun:'পূর্ণ রোদ', temp:'20-35°C',
+    plantSeason:'ফেব্রুয়ারি-মার্চ', harvestSeason:'১০-১৪ মাস পর',
+    growDays:300, yield:'২০-৪০ টন/হেক্টর', difficulty:1,
+    diseases:['পানামা উইল্ট','সিগাটোকা লিফ স্পট','বাঞ্চি টপ'],
+    treatments:['রোগ-প্রতিরোধী জাত','সঠিক নিষ্কাশন','সাকার ব্যবস্থাপনা'],
+    nutrition:'পটাশিয়াম, ভিটামিন B6, C, ফাইবার', marketVal:'৳৩০-৬০/ডজন',
+    steps:['জমি নির্বাচন','তেউড় রোপণ','সার ও সেচ','পাতা কাটা','থোর বাঁধা','ফসল সংগ্রহ'],
+    tags:['ফল','সারাবছর','পুষ্টিকর'],
+    facts:'কলা মূলত বীজহীন — এটি ক্লোন হিসেবে বংশ বৃদ্ধি করে।'
+  },
+  { id:'jackfruit', name:'কাঁঠাল', eng:'Jackfruit', sci:'Artocarpus heterophyllus', cat:'fruit', emoji:'🍈',
+    bgGrad:'linear-gradient(135deg,#d4f0a0,#aee060)', desc:'বাংলাদেশের জাতীয় ফল। বিশ্বের বৃহত্তম গাছের ফল। কাঁচা ও পাকা দুভাবেই খাওয়া যায়।',
+    climate:'ক্রান্তীয়', soil:'দোআঁশ', water:'মাঝারি', sun:'পূর্ণ রোদ', temp:'22-35°C',
+    plantSeason:'যেকোনো সময়', harvestSeason:'মে-আগস্ট',
+    growDays:'৫-৬ বছর (প্রথম ফল)', yield:'৫০-৮০টি/গাছ/বছর', difficulty:1,
+    diseases:['ফল পচা','লিফ স্পট','কাণ্ড পচা'],
+    treatments:['Bordeaux মিশ্রণ','সঠিক ছাঁটাই','নিষ্কাশন নিশ্চিত'],
+    nutrition:'ভিটামিন C, ম্যাগনেসিয়াম, পটাশিয়াম, প্রোটিন', marketVal:'৳৩০-৬০/কেজি',
+    steps:['চারা তৈরি','রোপণ','সার','ছাঁটাই','ফলের পরিচর্যা','সংগ্রহ'],
+    tags:['জাতীয় ফল','দেশীয়','বহুবর্ষজীবী'],
+    facts:'কাঁঠাল বিশ্বের বৃহত্তম বৃক্ষজাত ফল।'
+  },
+  { id:'wheat', name:'গম', eng:'Wheat', sci:'Triticum aestivum', cat:'grain', emoji:'🌾',
+    bgGrad:'linear-gradient(135deg,#e8d5a0,#d4b870)', desc:'ধানের পরে বাংলাদেশের দ্বিতীয় গুরুত্বপূর্ণ খাদ্যশস্য। রুটি ও আটার প্রধান উৎস।',
+    climate:'শীতকালীন', soil:'দোআঁশ', water:'কম-মাঝারি', sun:'পূর্ণ রোদ', temp:'15-22°C',
+    plantSeason:'নভেম্বর-ডিসেম্বর', harvestSeason:'মার্চ-এপ্রিল',
+    growDays:110, yield:'২-৪ টন/হেক্টর', difficulty:1,
+    diseases:['গমের মরিচা','পাউডারি মিলডিউ','ব্লাস্ট'],
+    treatments:['Propiconazole স্প্রে','রোগ-প্রতিরোধী জাত'],
+    nutrition:'কার্বোহাইড্রেট, প্রোটিন, ফাইবার, আয়রন', marketVal:'৳৩৫-৪৫/কেজি',
+    steps:['জমি চাষ','বীজ শোধন','বপন','সার','সেচ','কাটা ও মাড়াই'],
+    tags:['খাদ্যশস্য','শীতকালীন','রপ্তানি'],
+    facts:'গম থেকে আটা, ময়দা, সুজি সবই তৈরি হয়।'
+  },
+  { id:'chili', name:'মরিচ', eng:'Chili', sci:'Capsicum annuum', cat:'spice', emoji:'🌶️',
+    bgGrad:'linear-gradient(135deg,#ffcccc,#ff7070)', desc:'বাংলাদেশের রান্নার অপরিহার্য মশলা। কাঁচা ও শুকনো মরিচ সারা বছর ব্যবহৃত হয়।',
+    climate:'উষ্ণ', soil:'বেলে দোআঁশ', water:'মাঝারি', sun:'পূর্ণ রোদ', temp:'20-30°C',
+    plantSeason:'জুলাই-আগস্ট', harvestSeason:'ডিসেম্বর-মার্চ',
+    growDays:90, yield:'৮-১২ টন/হেক্টর', difficulty:2,
+    diseases:['চিলি ভাইরাস','অ্যান্থ্রাকনোজ','উইল্ট'],
+    treatments:['নিম তেল স্প্রে','মালচিং','ড্রিপ সেচ'],
+    nutrition:'ভিটামিন C, A, ক্যাপসাইসিন', marketVal:'৳৮০-২০০/কেজি',
+    steps:['বীজতলা','চারা রোপণ','সার','মালচিং','ফলের পরিচর্যা','সংগ্রহ'],
+    tags:['মশলা','তীক্ষ্ণ','বাণিজ্যিক'],
+    facts:'মরিচে ভিটামিন C কমলার চেয়ে ৩ গুণ বেশি।'
+  },
+  { id:'garlic', name:'রসুন', eng:'Garlic', sci:'Allium sativum', cat:'spice', emoji:'🧄',
+    bgGrad:'linear-gradient(135deg,#f0f0e0,#d8d8b0)', desc:'রান্না ও ওষুধে ব্যবহৃত গুরুত্বপূর্ণ মশলা ফসল। অ্যান্টিবায়োটিক গুণাবলীর জন্য পরিচিত।',
+    climate:'শীতকালীন', soil:'দোআঁশ', water:'কম', sun:'পূর্ণ রোদ', temp:'12-22°C',
+    plantSeason:'অক্টোবর-নভেম্বর', harvestSeason:'মার্চ-এপ্রিল',
+    growDays:150, yield:'৬-৮ টন/হেক্টর', difficulty:1,
+    diseases:['ব্লাস্ট রোগ','পার্পল ব্লচ'],
+    treatments:['Iprodione ছত্রাকনাশক','সুস্থ কোয়া রোপণ'],
+    nutrition:'ম্যাঙ্গানিজ, ভিটামিন B6, C, সেলেনিয়াম', marketVal:'৳১৫০-৩০০/কেজি',
+    steps:['জমি প্রস্তুত','কোয়া রোপণ','সার','আগাছা দমন','সেচ','তোলা'],
+    tags:['মশলা','ঔষধি','শীতকালীন'],
+    facts:'রসুনের ব্যবহার ৭০০০ বছরের পুরনো।'
+  },
+  { id:'spinach', name:'পালং শাক', eng:'Spinach', sci:'Spinacia oleracea', cat:'vegetable', emoji:'🥬',
+    bgGrad:'linear-gradient(135deg,#c8f0b0,#8ecf70)', desc:'পুষ্টিতে ভরপুর শীতকালীন শাকসবজি। আয়রন ও ফলিক এসিডের চমৎকার উৎস।',
+    climate:'শীতল', soil:'দোআঁশ', water:'মাঝারি', sun:'আংশিক ছায়া', temp:'10-20°C',
+    plantSeason:'অক্টোবর-ডিসেম্বর', harvestSeason:'নভেম্বর-ফেব্রুয়ারি',
+    growDays:45, yield:'১৫-২০ টন/হেক্টর', difficulty:1,
+    diseases:['ডাউনি মিলডিউ','লিফ স্পট'],
+    treatments:['জল নিষ্কাশন','রোগ-প্রতিরোধী জাত'],
+    nutrition:'আয়রন, ফলিক এসিড, ভিটামিন A, K, C', marketVal:'৳২০-৪০/কেজি',
+    steps:['বীজ শোধন','বপন','পাতলা করা','সার','আগাছা দমন','সংগ্রহ'],
+    tags:['শাকসবজি','পুষ্টিকর','শীতকালীন'],
+    facts:'পালং শাকে ডিমের চেয়ে বেশি আয়রন আছে।'
+  },
+  { id:'tea', name:'চা', eng:'Tea', sci:'Camellia sinensis', cat:'cash', emoji:'🍵',
+    bgGrad:'linear-gradient(135deg,#c8e8c0,#88c870)', desc:'বাংলাদেশের গুরুত্বপূর্ণ রপ্তানি পণ্য। সিলেটের চা বিশ্বমানের।',
+    climate:'উষ্ণ আর্দ্র পাহাড়ী', soil:'অম্লীয় দোআঁশ', water:'বেশি', sun:'আংশিক', temp:'18-28°C',
+    plantSeason:'যেকোনো বর্ষাকাল', harvestSeason:'সারাবছর',
+    growDays:'৩-৫ বছর (প্রথম পাতা)', yield:'২০০০-২৫০০ কেজি/হেক্টর', difficulty:3,
+    diseases:['ব্লিস্টার ব্লাইট','রেড স্পাইডার মাইট','থ্রিপস'],
+    treatments:['Bordeaux মিশ্রণ','কীটনাশক স্প্রে','ছাঁটাই'],
+    nutrition:'ক্যাফেইন, অ্যান্টিঅক্সিডেন্ট, ফ্লোরাইড', marketVal:'৳৩০০-৫০০/কেজি',
+    steps:['চারা তৈরি','রোপণ','শেড তৈরি','ছাঁটাই','পাতা তোলা','প্রক্রিয়াজাতকরণ'],
+    tags:['অর্থকরী','রপ্তানি','পানীয়'],
+    facts:'বাংলাদেশে ১৬৭টি চা বাগান আছে।'
+  },
+  { id:'maize', name:'ভুট্টা', eng:'Maize', sci:'Zea mays', cat:'grain', emoji:'🌽',
+    bgGrad:'linear-gradient(135deg,#fff0b0,#ffd060)', desc:'পোল্ট্রি শিল্পের প্রধান খাদ্য উপাদান। বাংলাদেশে ব্যাপকভাবে চাষ বাড়ছে।',
+    climate:'উষ্ণ', soil:'দোআঁশ', water:'মাঝারি', sun:'পূর্ণ রোদ', temp:'20-30°C',
+    plantSeason:'নভেম্বর-ডিসেম্বর', harvestSeason:'মার্চ-এপ্রিল',
+    growDays:110, yield:'৭-১০ টন/হেক্টর', difficulty:1,
+    diseases:['ফল আর্মিওয়ার্ম','মেডিস ব্লাইট','কান রট'],
+    treatments:['কীটনাশক স্প্রে','রোগ-প্রতিরোধী হাইব্রিড'],
+    nutrition:'কার্বোহাইড্রেট, প্রোটিন, ভিটামিন B', marketVal:'৳২২-২৮/কেজি',
+    steps:['জমি চাষ','বপন','সার','সেচ','কীট দমন','কাটা'],
+    tags:['খাদ্যশস্য','পোল্ট্রি ফিড','বাণিজ্যিক'],
+    facts:'ভুট্টা থেকে পপকর্ন, তেল, এবং বায়োফুয়েল তৈরি হয়।'
+  },
+  { id:'guava', name:'পেয়ারা', eng:'Guava', sci:'Psidium guajava', cat:'fruit', emoji:'🍐',
+    bgGrad:'linear-gradient(135deg,#d4f0d0,#a0e060)', desc:'ভিটামিন সি-র রাজা। সারাবছর পাওয়া যায়, খুব সহজে চাষযোগ্য ফল।',
+    climate:'ক্রান্তীয়', soil:'যেকোনো মাটি', water:'কম', sun:'পূর্ণ রোদ', temp:'20-30°C',
+    plantSeason:'বর্ষার আগে', harvestSeason:'সারাবছর',
+    growDays:'২-৩ বছর (প্রথম ফল)', yield:'১৫-২০ টন/হেক্টর', difficulty:1,
+    diseases:['অ্যান্থ্রাকনোজ','ফল মাছি','উইল্ট'],
+    treatments:['Carbendazim','ব্যাগিং','আক্রান্ত ফল সরানো'],
+    nutrition:'ভিটামিন C (আপেলের ৪ গুণ), পটাশিয়াম, ফাইবার', marketVal:'৳৩০-৬০/কেজি',
+    steps:['চারা তৈরি','রোপণ','সার','ছাঁটাই','ফলের পরিচর্যা','সংগ্রহ'],
+    tags:['ফল','ভিটামিন C','সহজ চাষ'],
+    facts:'পেয়ারায় কমলার চেয়ে ৪ গুণ বেশি ভিটামিন C।'
+  },
+  { id:'papaya', name:'পেঁপে', eng:'Papaya', sci:'Carica papaya', cat:'fruit', emoji:'🧡',
+    bgGrad:'linear-gradient(135deg,#ffe0b0,#ffb870)', desc:'ঔষধিগুণসম্পন্ন জনপ্রিয় ফল। কাঁচা ও পাকা উভয়ভাবেই খাওয়া যায়। দ্রুত ফলদায়ী।',
+    climate:'ক্রান্তীয়', soil:'বেলে দোআঁশ', water:'মাঝারি', sun:'পূর্ণ রোদ', temp:'22-32°C',
+    plantSeason:'ফেব্রুয়ারি-মার্চ', harvestSeason:'৮-১০ মাস পর',
+    growDays:270, yield:'৪০-৬০ টন/হেক্টর', difficulty:1,
+    diseases:['রিং স্পট ভাইরাস','অ্যান্থ্রাকনোজ','রুট রট'],
+    treatments:['ভাইরাস-প্রতিরোধী জাত','নিষ্কাশন নিশ্চিত'],
+    nutrition:'ভিটামিন C, A, পাপাইন এনজাইম, ফোলেট', marketVal:'৳৩০-৬০/কেজি',
+    steps:['বীজ শোধন','বীজতলা','রোপণ','সার ও সেচ','ফুলের লিঙ্গ পরীক্ষা','সংগ্রহ'],
+    tags:['ফল','ঔষধি','দ্রুত ফলন'],
+    facts:'পেঁপের পাতা ডেঙ্গু জ্বরে উপকারী বলে গবেষণা দেখিয়েছে।'
+  },
+  { id:'onion', name:'পেঁয়াজ', eng:'Onion', sci:'Allium cepa', cat:'spice', emoji:'🧅',
+    bgGrad:'linear-gradient(135deg,#f8e8d0,#e8c8a0)', desc:'রান্নার সবচেয়ে গুরুত্বপূর্ণ মশলা। বাংলাদেশে পেঁয়াজ একটি গুরুত্বপূর্ণ অর্থনৈতিক ফসল।',
+    climate:'শীতকালীন', soil:'দোআঁশ বেলে', water:'মাঝারি', sun:'পূর্ণ রোদ', temp:'15-25°C',
+    plantSeason:'নভেম্বর-ডিসেম্বর', harvestSeason:'মার্চ-এপ্রিল',
+    growDays:120, yield:'১৫-২০ টন/হেক্টর', difficulty:2,
+    diseases:['পার্পল ব্লচ','থ্রিপস','স্মাট'],
+    treatments:['Iprodione স্প্রে','সুস্থ বীজ','সঠিক সংরক্ষণ'],
+    nutrition:'ভিটামিন C, B6, কোয়ারসেটিন, ক্রোমিয়াম', marketVal:'৳৬০-১৫০/কেজি',
+    steps:['বীজতলা','চারা রোপণ','সার','আগাছা দমন','সেচ','তোলা ও শুকানো'],
+    tags:['মশলা','শীতকালীন','বাণিজ্যিক'],
+    facts:'পেঁয়াজ কাটলে চোখে পানি আসার কারণ সালফেনিক এসিড।'
+  },
+  { id:'turmeric', name:'হলুদ', eng:'Turmeric', sci:'Curcuma longa', cat:'spice', emoji:'🟡',
+    bgGrad:'linear-gradient(135deg,#fff0a0,#ffd060)', desc:'বাংলাদেশের ঐতিহ্যবাহী মশলা ও ঔষধি উদ্ভিদ। কারকিউমিনের জন্য বিশ্বব্যাপী পরিচিত।',
+    climate:'উষ্ণ আর্দ্র', soil:'দোআঁশ', water:'বেশি', sun:'আংশিক', temp:'20-30°C',
+    plantSeason:'এপ্রিল-মে', harvestSeason:'জানুয়ারি-মার্চ',
+    growDays:270, yield:'২০-২৫ টন/হেক্টর', difficulty:1,
+    diseases:['রাইজোম রট','লিফ ব্লচ'],
+    treatments:['বীজ শোধন','জল নিষ্কাশন'],
+    nutrition:'কারকিউমিন, আয়রন, ম্যাঙ্গানিজ, ভিটামিন B6', marketVal:'৳১২০-২০০/কেজি',
+    steps:['রাইজোম প্রস্তুত','রোপণ','মালচিং','সার','নিড়ানি','তোলা ও শুকানো'],
+    tags:['মশলা','ঔষধি','রপ্তানি'],
+    facts:'হলুদ ৪৫০০ বছর ধরে ঔষধ হিসেবে ব্যবহৃত হচ্ছে।'
+  },
+  { id:'ginger', name:'আদা', eng:'Ginger', sci:'Zingiber officinale', cat:'spice', emoji:'🫚',
+    bgGrad:'linear-gradient(135deg,#f0e8d0,#d8c090)', desc:'বহুমুখী ঔষধি ও মশলা ফসল। বাংলাদেশের রান্না ও আয়ুর্বেদিক চিকিৎসায় অপরিহার্য।',
+    climate:'উষ্ণ আর্দ্র', soil:'দোআঁশ', water:'বেশি', sun:'আংশিক', temp:'22-30°C',
+    plantSeason:'এপ্রিল-মে', harvestSeason:'ডিসেম্বর-ফেব্রুয়ারি',
+    growDays:240, yield:'১৫-২০ টন/হেক্টর', difficulty:2,
+    diseases:['রাইজোম রট','ব্যাকটেরিয়াল উইল্ট'],
+    treatments:['জৈব বীজ শোধন','নিষ্কাশন নিশ্চিত'],
+    nutrition:'জিনজেরল, ম্যাগনেসিয়াম, পটাশিয়াম, ভিটামিন B6', marketVal:'৳১৫০-২৫০/কেজি',
+    steps:['রাইজোম কাটা','শোধন','রোপণ','মালচিং','সার','তোলা'],
+    tags:['মশলা','ঔষধি','রপ্তানি'],
+    facts:'আদার নির্যাস বমিভাব ও প্রদাহ কমাতে বৈজ্ঞানিকভাবে প্রমাণিত।'
+  },
+  { id:'mustard', name:'সরিষা', eng:'Mustard', sci:'Brassica juncea', cat:'cash', emoji:'🌻',
+    bgGrad:'linear-gradient(135deg,#fff8c0,#ffe060)', desc:'তেলবীজ ফসল হিসেবে বাংলাদেশে ব্যাপক চাষ হয়। সরিষার তেল রান্নার অপরিহার্য উপাদান।',
+    climate:'শীতকালীন', soil:'দোআঁশ', water:'কম-মাঝারি', sun:'পূর্ণ রোদ', temp:'12-25°C',
+    plantSeason:'অক্টোবর-নভেম্বর', harvestSeason:'ফেব্রুয়ারি-মার্চ',
+    growDays:90, yield:'০.৮-১.২ টন/হেক্টর', difficulty:1,
+    diseases:['অল্টারনেরিয়া ব্লাইট','সাদা মরিচা'],
+    treatments:['Mancozeb স্প্রে','সুস্থ বীজ'],
+    nutrition:'তেল ৩৫-৪৫%, প্রোটিন, ওমেগা-৩', marketVal:'৳৩৫-৫০/কেজি (বীজ)',
+    steps:['জমি চাষ','বপন','পাতলা করা','সার','সেচ','কাটা ও মাড়াই'],
+    tags:['তেলবীজ','শীতকালীন','বাণিজ্যিক'],
+    facts:'বাংলাদেশ সরিষা উৎপাদনে এশিয়ার মধ্যে গুরুত্বপূর্ণ।'
+  },
+  { id:'coconut', name:'নারকেল', eng:'Coconut', sci:'Cocos nucifera', cat:'tree', emoji:'🥥',
+    bgGrad:'linear-gradient(135deg,#d8f0b8,#a8d878)', desc:'উপকূলীয় বাংলাদেশের গুরুত্বপূর্ণ বৃক্ষ ফসল। ফল, পানি, তেল, ছোবড়া সবই ব্যবহারযোগ্য।',
+    climate:'উপকূলীয় ক্রান্তীয়', soil:'বালুকাময়', water:'মাঝারি-বেশি', sun:'পূর্ণ রোদ', temp:'26-35°C',
+    plantSeason:'বর্ষার শুরু', harvestSeason:'৪-৫ বছর পর সারাবছর',
+    growDays:'৪-৫ বছর (প্রথম ফল)', yield:'৬০-৮০ নারকেল/গাছ/বছর', difficulty:1,
+    diseases:['কলা পচা','লিফ ব্লাইট','মেলি বাগ'],
+    treatments:['Bordeaux পেস্ট','পোকা দমন'],
+    nutrition:'কার্বোহাইড্রেট, চর্বি, পটাশিয়াম, ম্যাগনেসিয়াম', marketVal:'৳২০-৫০/পিস',
+    steps:['বীজ নারকেল','চারা তৈরি','রোপণ','সার','সেচ','নিয়মিত ফসল সংগ্রহ'],
+    tags:['বৃক্ষ','উপকূলীয়','বহুমুখী'],
+    facts:'নারকেল গাছকে "গাছের রাজা" বলা হয় কারণ গাছের প্রতিটি অংশ ব্যবহারযোগ্য।'
+  },
+  { id:'lentil', name:'মসুর ডাল', eng:'Red Lentil', sci:'Lens culinaris', cat:'grain', emoji:'🫘',
+    bgGrad:'linear-gradient(135deg,#f8d8b8,#e0b880)', desc:'প্রোটিনের সস্তা ও উৎকৃষ্ট উৎস। বাংলাদেশের দৈনন্দিন রান্নার অপরিহার্য উপাদান।',
+    climate:'শীতকালীন', soil:'দোআঁশ', water:'কম', sun:'পূর্ণ রোদ', temp:'15-25°C',
+    plantSeason:'নভেম্বর-ডিসেম্বর', harvestSeason:'মার্চ-এপ্রিল',
+    growDays:100, yield:'১-১.৫ টন/হেক্টর', difficulty:1,
+    diseases:['মরিচা','পাউডারি মিলডিউ','উইল্ট'],
+    treatments:['বীজ শোধন','রোগ-প্রতিরোধী জাত'],
+    nutrition:'প্রোটিন ২৬%, ফাইবার, আয়রন, ফোলেট', marketVal:'৳১২০-১৬০/কেজি',
+    steps:['জমি প্রস্তুত','বপন','পাতলা করা','সার','সেচ','কাটা'],
+    tags:['ডাল','প্রোটিন','শীতকালীন'],
+    facts:'মসুর ডাল খাওয়া শুরু হয় ১৩,০০০ বছর আগে।'
+  },
+];
+
+/* ================================================================
+   DISEASES DATABASE
+================================================================ */
+const DISEASES_DB = [
+  { id:'blight', name:'Leaf Blight (পাতার ব্লাইট)', badge:'⚠️', color:'#e8a926', bg:'rgba(232,169,38,.1)', icon:'ti-alert-triangle', conf:85, severity:'মাঝারি', crop:'ধান, গম', spreadDays:'৭-১০ দিন', causes:['অতিরিক্ত আর্দ্রতা','দুর্বল বায়ু চলাচল','দূষিত বীজ'], treatments:['আক্রান্ত পাতা কেটে পুড়িয়ে ফেলুন','Mancozeb ছত্রাকনাশক ১০ দিন পরপর স্প্রে করুন','সঠিক নিষ্কাশন ব্যবস্থা নিশ্চিত করুন','রোগ-প্রতিরোধী জাত ব্যবহার করুন'], prevention:'সঠিক দূরত্বে রোপণ ও বায়ু চলাচল নিশ্চিত রাখুন', patternBuckets:[0,1,5,10,11,20,21,30,31,40] },
+  { id:'mildew', name:'Powdery Mildew (পাউডারি মিলডিউ)', badge:'⚠️', color:'#888', bg:'rgba(136,136,136,.1)', icon:'ti-circle-dotted', conf:91, severity:'হালকা-মাঝারি', crop:'সবজি, ফুল', spreadDays:'১০-১৪ দিন', causes:['শুষ্ক আবহাওয়া','ঘন পাতা','অতিরিক্ত নাইট্রোজেন'], treatments:['আক্রান্ত অংশ অপসারণ','Sulfur ছত্রাকনাশক স্প্রে','বায়ু চলাচল বাড়ান','অতিরিক্ত সার পরিহার'], prevention:'পাতা ভিজিয়ে সেচ না দিয়ে গোড়ায় দিন', patternBuckets:[2,6,12,16,22,26,32,36,42,46] },
+  { id:'rust', name:'Rust Disease (জং রোগ)', badge:'🔴', color:'#e05252', bg:'rgba(224,82,82,.1)', icon:'ti-alert-circle', conf:78, severity:'গুরুতর', crop:'গম, ভুট্টা', spreadDays:'৩-৫ দিন', causes:['ছত্রাকের বীজকণা','ঠান্ডা আর্দ্র আবহাওয়া'], treatments:['দ্রুত আক্রান্ত গাছ সরান','Triazole ছত্রাকনাশক ব্যবহার করুন','সুস্থ গাছে প্রতিষেধক স্প্রে','কৃষি অফিসে যোগাযোগ করুন'], prevention:'মৌসুম শুরুর আগে প্রতিষেধক স্প্রে করুন', patternBuckets:[3,7,13,17,23,27,33,37,43,47] },
+  { id:'mosaic', name:'Mosaic Virus (মোজাইক ভাইরাস)', badge:'🟡', color:'#2ec4a4', bg:'rgba(46,196,164,.1)', icon:'ti-dna', conf:82, severity:'মাঝারি-গুরুতর', crop:'টমেটো, মরিচ', spreadDays:'৭-১২ দিন', causes:['পোকামাকড় (Aphid)','সংক্রমিত বীজ','যন্ত্রপাতির মাধ্যমে'], treatments:['আক্রান্ত গাছ উপড়ে ফেলুন','Aphid নিয়ন্ত্রণ করুন','পরিষ্কার সরঞ্জাম ব্যবহার করুন','ভাইরাস-মুক্ত বীজ ব্যবহার করুন'], prevention:'ভাইরাস-প্রতিরোধী জাত ব্যবহার করুন', patternBuckets:[4,8,14,18,24,28,34,38,44,48] },
+  { id:'leafspot', name:'Leaf Spot (পাতার দাগ)', badge:'🟠', color:'#c8841a', bg:'rgba(200,132,26,.1)', icon:'ti-circle-x', conf:87, severity:'হালকা-মাঝারি', crop:'সব ফসল', spreadDays:'৮-১২ দিন', causes:['ছত্রাক','অতিরিক্ত আর্দ্রতা','দুর্বল গাছ'], treatments:['আক্রান্ত পাতা সরান','Chlorothalonil স্প্রে করুন','সঠিক সেচ দিন','জৈব সার ব্যবহার করুন'], prevention:'নিয়মিত পর্যবেক্ষণ ও প্রতিরোধমূলক স্প্রে', patternBuckets:[9,19,29,39,49,59,69,79,89,95,96,97] },
+  { id:'healthy', name:'সুস্থ গাছ (Healthy Plant)', badge:'✅', color:'#3a8035', bg:'rgba(58,128,53,.1)', icon:'ti-check', conf:96, severity:'—', crop:'যেকোনো', spreadDays:'—', causes:[], treatments:['গাছ সম্পূর্ণ সুস্থ আছে','নিয়মিত পরিচর্যা চালিয়ে যান','মাসে একবার জৈব সার দিন','নিয়মিত পর্যবেক্ষণ করুন'], prevention:'ভালো পরিচর্যাই সেরা প্রতিরোধ', patternBuckets:[50,51,55,60,61,62,65,70,71,72,75,80,81,85,86,90,91,92,93,94,98,99] },
+];
+
+/* ================================================================
+   KNOWLEDGE DATABASE
+================================================================ */
+const KNOWLEDGE = [
+  { id:'k1', title:'ধান চাষের সম্পূর্ণ গাইড', cat:'cultivation', emoji:'🌾', bg:'linear-gradient(135deg,#c8e6b0,#88c870)', readTime:'১৫ মিনিট', date:'৫ জুন ২০২৫', desc:'বোরো, আমন ও আউশ ধানের সঠিক চাষ পদ্ধতি, সার ব্যবস্থাপনা ও রোগ দমন।' },
+  { id:'k2', title:'জৈব কৃষি: শুরু থেকে শেষ', cat:'organic', emoji:'♻️', bg:'linear-gradient(135deg,#d4f0a0,#a8d878)', readTime:'২০ মিনিট', date:'৩ জুন ২০২৫', desc:'রাসায়নিক সার ও কীটনাশক ছাড়াই লাভজনক চাষ করুন।' },
+  { id:'k3', title:'ড্রিপ সেচ পদ্ধতি', cat:'irrigation', emoji:'💧', bg:'linear-gradient(135deg,#b3e5fc,#4fc3f7)', readTime:'১০ মিনিট', date:'১ জুন ২০২৫', desc:'পানি সাশ্রয় করে বেশি ফলন পান — আধুনিক ড্রিপ সেচের সম্পূর্ণ গাইড।' },
+  { id:'k4', title:'কম্পোস্ট সার তৈরির পদ্ধতি', cat:'fertilizer', emoji:'🌱', bg:'linear-gradient(135deg,#d7ccc8,#a1887f)', readTime:'12 মিনিট', date:'৩০ মে ২০২৫', desc:'ঘরের বর্জ্য দিয়ে উন্নত মানের জৈব সার তৈরি করুন।' },
+  { id:'k5', title:'স্মার্ট ফার্মিং: IoT ও AI', cat:'tech', emoji:'📱', bg:'linear-gradient(135deg,#c5cae9,#7986cb)', readTime:'১৮ মিনিট', date:'২৮ মে ২০২৫', desc:'আধুনিক প্রযুক্তি ব্যবহার করে কৃষিকে লাভজনক করুন।' },
+  { id:'k6', title:'পোকামাকড় দমনের প্রাকৃতিক উপায়', cat:'pest', emoji:'🐛', bg:'linear-gradient(135deg,#f8bbd0,#ec407a)', readTime:'১৪ মিনিট', date:'২৫ মে ২০২৫', desc:'কীটনাশক ছাড়াই পোকামাকড় থেকে ফসল রক্ষা করুন।' },
+  { id:'k7', title:'হাইড্রোপনিক্স চাষ পদ্ধতি', cat:'tech', emoji:'🏗️', bg:'linear-gradient(135deg,#b2dfdb,#4db6ac)', readTime:'২২ মিনিট', date:'২২ মে ২০২৫', desc:'মাটি ছাড়া পানিতে সবজি চাষের সম্পূর্ণ গাইড।' },
+  { id:'k8', title:'সবজির জন্য সেরা মাটি প্রস্তুতি', cat:'cultivation', emoji:'🪱', bg:'linear-gradient(135deg,#d7ccc8,#8d6e63)', readTime:'১০ মিনিট', date:'২০ মে ২০২৫', desc:'সবজি চাষের জন্য আদর্শ মাটি কীভাবে তৈরি করবেন।' },
+  { id:'k9', title:'সার ব্যবহারের সঠিক নিয়ম', cat:'fertilizer', emoji:'🧪', bg:'linear-gradient(135deg,#fff9c4,#ffd54f)', readTime:'১৬ মিনিট', date:'১৮ মে ২০২৫', desc:'কোন ফসলে কতটুকু সার দেবেন — সম্পূর্ণ গাইড।' },
+  { id:'k10', title:'ফল বাগান তৈরির নিয়ম', cat:'cultivation', emoji:'🌳', bg:'linear-gradient(135deg,#c8e6b0,#81c784)', readTime:'২৫ মিনিট', date:'১৫ মে ২০২৫', desc:'বাড়ির পাশে ফলের বাগান তৈরি করুন সহজেই।' },
+  { id:'k11', title:'জৈব কীটনাশক তৈরি ঘরে', cat:'organic', emoji:'🌿', bg:'linear-gradient(135deg,#dcedc8,#aed581)', readTime:'১২ মিনিট', date:'১২ মে ২০২৫', desc:'নিম, রসুন ও অন্যান্য প্রাকৃতিক উপাদান দিয়ে কীটনাশক তৈরি।' },
+  { id:'k12', title:'বন্যার পর ফসল পুনরুদ্ধার', cat:'cultivation', emoji:'🌊', bg:'linear-gradient(135deg,#b3e5fc,#81d4fa)', readTime:'১৪ মিনিট', date:'১০ মে ২০২৫', desc:'বন্যাক্ষতিগ্রস্ত জমিতে দ্রুত ফসল উৎপাদন শুরু করুন।' },
+];
+
+/* ================================================================
+   SEASONAL CALENDAR DATA
+================================================================ */
+const MONTHS = ['জানু','ফেব্রু','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টে','অক্টো','নভে','ডিসে'];
+const SEASON_DATA = [
+  { name:'ধান (আমন)', data:['r','r','r','r','r','r','p','p','g','g','h','r'] },
+  { name:'ধান (বোরো)', data:['g','g','h','h','r','r','r','r','r','r','r','p'] },
+  { name:'গম', data:['g','g','h','r','r','r','r','r','r','r','p','p'] },
+  { name:'আলু', data:['g','h','r','r','r','r','r','r','r','p','p','g'] },
+  { name:'সরিষা', data:['h','r','r','r','r','r','r','r','r','p','p','g'] },
+  { name:'ভুট্টা', data:['g','g','h','r','r','r','r','r','r','r','p','p'] },
+  { name:'টমেটো', data:['h','h','h','r','r','r','r','r','p','g','g','h'] },
+  { name:'মরিচ', data:['h','h','r','r','r','r','p','g','g','g','g','h'] },
+  { name:'পেঁয়াজ', data:['g','h','h','r','r','r','r','r','r','p','p','g'] },
+  { name:'পাট', data:['r','r','r','p','g','g','h','h','r','r','r','r'] },
+  { name:'আম', data:['r','r','r','r','h','h','h','r','r','r','r','r'] },
+  { name:'কলা', data:['h','h','h','h','h','h','g','g','g','g','h','h'] },
+];
+
+/* ================================================================
+   HASH-BASED DISEASE DETECTION
+================================================================ */
+function getImageHash(file) {
+  const n = [...file.name].reduce((a,c) => a + c.charCodeAt(0), 0);
+  const s = file.size % 10000;
+  const t = Math.floor((file.lastModified || Date.now()) / 1000) % 1000;
+  const v = (n * 31 + s * 17 + t * 7) % 100;
+  return v < 0 ? v + 100 : v;
+}
+function detectDisease(file) {
+  const hash = getImageHash(file);
+  for (const d of DISEASES_DB) {
+    if (d.patternBuckets.includes(hash)) return { disease:d, hash };
+  }
+  return { disease:DISEASES_DB[hash % DISEASES_DB.length], hash };
+}
+function getConf(d, hash) {
+  const v = (hash % 14) - 7;
+  return Math.max(65, Math.min(99, d.conf + v));
+}
+
+/* ================================================================
+   PLANT OF DAY
+================================================================ */
+const dayIdx = new Date().getDate() % PLANTS.length;
+const PLANT_OF_DAY = PLANTS[dayIdx];
+
+/* ================================================================
+   STATE
+================================================================ */
+let currentCat = 'all';
+let shownPlants = 0;
+const PLANTS_PER_PAGE = 12;
+let currentFile = null;
+let currentKnowledgeCat = 'all';
+
+/* ================================================================
+   NAVIGATION
+================================================================ */
+function goPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page)?.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+  document.getElementById('nav-' + page)?.classList.add('active');
+  window.scrollTo(0,0);
+  if (page==='encyclopedia') renderEncyclopedia();
+  if (page==='home') initHome();
+  if (page==='tools') renderTools();
+  if (page==='knowledge') renderKnowledge();
+  if (page==='calendar') renderCalendar();
+}
+
+/* ================================================================
+   HOME PAGE
+================================================================ */
+function initHome() {
+  renderFeaturedPlants();
+  renderHomeKnowledge();
+  renderPlantOfDay();
+}
+
+function renderFeaturedPlants() {
+  const grid = document.getElementById('featured-plants-grid');
+  if (!grid) return;
+  const featured = PLANTS.slice(0,6);
+  grid.innerHTML = featured.map(p => plantCardHTML(p)).join('');
+}
+
+function renderHomeKnowledge() {
+  const grid = document.getElementById('home-knowledge-grid');
+  if (!grid) return;
+  grid.innerHTML = KNOWLEDGE.slice(0,3).map(k => knowledgeCardHTML(k)).join('');
+}
+
+function renderPlantOfDay() {
+  const el = document.getElementById('plant-of-day-card');
+  if (!el) return;
+  const p = PLANT_OF_DAY;
+  el.innerHTML = `
+    <div style="background:${p.bgGrad};padding:32px 24px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;">
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(13,32,16,.5);letter-spacing:.8px;text-transform:uppercase;margin-bottom:8px;">🌞 আজকের গাছ</div>
+        <h2 style="font-family:var(--ff-display);font-size:clamp(22px,4vw,32px);color:var(--text1);margin-bottom:6px;">${p.name}</h2>
+        <p style="font-size:13px;color:var(--text2);margin-bottom:12px;font-style:italic;">${p.sci}</p>
+        <p style="font-size:14px;color:var(--text2);line-height:1.7;max-width:400px;">${p.desc.slice(0,120)}...</p>
+        <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;">
+          <div class="badge badge-green"><i class="ti ti-plant"></i>${p.climate}</div>
+          <div class="badge badge-gold"><i class="ti ti-sun"></i>${p.sun}</div>
+        </div>
+      </div>
+      <div style="font-size:clamp(60px,10vw,96px);animation:float 4s ease-in-out infinite;">${p.emoji}</div>
+    </div>`;
+}
+
+/* ================================================================
+   PLANT CARD HTML
+================================================================ */
+function plantCardHTML(p) {
+  const diff = p.difficulty;
+  const dots = [1,2,3].map(i => `<div class="plant-difficulty-dot${i<=diff?' filled':''}"></div>`).join('');
+  return `<div class="plant-card" onclick="openPlant('${p.id}')">
+    <div class="plant-card-img" style="background:${p.bgGrad};">
+      <div style="font-size:64px;z-index:1;">${p.emoji}</div>
+      <div class="plant-card-img-overlay"></div>
+      <div class="plant-card-season"><div class="badge badge-green">${p.cat==='grain'?'🌾 শস্য':p.cat==='fruit'?'🍋 ফল':p.cat==='vegetable'?'🥦 সবজি':p.cat==='spice'?'🌿 মশলা':p.cat==='medicinal'?'💊 ঔষধি':p.cat==='cash'?'💰 অর্থকরী':p.cat==='tree'?'🌳 বৃক্ষ':'🌸 ফুল'}</div></div>
+    </div>
+    <div class="plant-card-body">
+      <div class="plant-card-name">${p.name}</div>
+      <div class="plant-card-sci">${p.sci}</div>
+      <div class="plant-card-meta">
+        <div class="tag"><i class="ti ti-droplet" style="font-size:11px;"></i>${p.water}</div>
+        <div class="tag"><i class="ti ti-sun" style="font-size:11px;"></i>${p.sun}</div>
+      </div>
+      <div class="plant-card-foot">
+        <div style="font-size:12px;color:var(--text3);">⏱ ${p.growDays} দিন</div>
+        <div class="plant-difficulty" title="কঠিনতা">${dots}</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ================================================================
+   ENCYCLOPEDIA
+================================================================ */
+let encSearchQuery = '';
+function renderEncyclopedia() {
+  shownPlants = 0;
+  encSearchQuery = '';
+  const inp = document.getElementById('plant-search-input');
+  if (inp) inp.value = '';
+  loadEncPage();
+}
+
+function loadEncPage() {
+  const grid = document.getElementById('encyclopedia-grid');
+  if (!grid) return;
+  const filtered = PLANTS.filter(p =>
+    (currentCat==='all' || p.cat===currentCat) &&
+    (encSearchQuery==='' || p.name.includes(encSearchQuery) || p.eng.toLowerCase().includes(encSearchQuery.toLowerCase()))
+  );
+  const slice = filtered.slice(0, shownPlants + PLANTS_PER_PAGE);
+  grid.innerHTML = slice.map(p => plantCardHTML(p)).join('');
+  shownPlants = slice.length;
+  const btn = document.getElementById('load-more-btn');
+  if (btn) btn.style.display = filtered.length > shownPlants ? 'inline-flex' : 'none';
+}
+
+function filterPlants(q) { encSearchQuery = q; shownPlants = 0; loadEncPage(); }
+function setCat(el, cat) {
+  currentCat = cat;
+  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  shownPlants = 0; loadEncPage();
+}
+function loadMorePlants() { loadEncPage(); }
+
+/* ================================================================
+   PLANT DETAIL
+================================================================ */
+function openPlant(idOrObj) {
+  const p = typeof idOrObj === 'string' ? PLANTS.find(x => x.id===idOrObj) : idOrObj;
+  if (!p) return;
+
+  // Hero
+  document.getElementById('pd-emoji').textContent = p.emoji;
+  document.getElementById('pd-names').innerHTML = `
+    <h1 style="font-family:var(--ff-display);font-size:clamp(26px,5vw,42px);color:#fff;margin-bottom:6px;">${p.name}</h1>
+    <h2 style="font-size:clamp(14px,2vw,18px);color:rgba(255,255,255,.6);font-weight:400;font-style:italic;margin-bottom:14px;">${p.eng} · ${p.sci}</h2>`;
+  const tagCat = {grain:'🌾 শস্য',fruit:'🍋 ফল',vegetable:'🥦 সবজি',spice:'🌿 মশলা',medicinal:'💊 ঔষধি',cash:'💰 অর্থকরী',tree:'🌳 বৃক্ষ',flower:'🌸 ফুল'};
+  document.getElementById('pd-tags').innerHTML =
+    (p.tags||[]).map(t => `<div class="plant-detail-tag">${t}</div>`).join('') +
+    `<div class="plant-detail-tag">${tagCat[p.cat]||p.cat}</div>`;
+
+  // Overview
+  document.getElementById('pd-overview-grid').innerHTML = [
+    {icon:'ti-thermometer',lbl:'তাপমাত্রা',val:p.temp},
+    {icon:'ti-sun',lbl:'সূর্যালোক',val:p.sun},
+    {icon:'ti-droplet',lbl:'সেচ',val:p.water},
+    {icon:'ti-mountain',lbl:'মাটি',val:p.soil},
+    {icon:'ti-cloud',lbl:'আবহাওয়া',val:p.climate},
+    {icon:'ti-calendar',lbl:'বপন মৌসুম',val:p.plantSeason},
+    {icon:'ti-scissors',lbl:'ফসল সংগ্রহ',val:p.harvestSeason},
+    {icon:'ti-clock',lbl:'বৃদ্ধিকাল',val:p.growDays+' দিন'},
+    {icon:'ti-chart-bar',lbl:'প্রত্যাশিত ফলন',val:p.yield},
+    {icon:'ti-currency-taka',lbl:'বাজার মূল্য',val:p.marketVal},
+  ].map(o => `
+    <div class="info-block">
+      <i class="ti ${o.icon} info-block-icon"></i>
+      <div class="info-block-label">${o.lbl}</div>
+      <div class="info-block-val">${o.val}</div>
+    </div>`).join('');
+
+  document.getElementById('pd-desc-box').innerHTML = `
+    <div class="section-eyebrow" style="margin-bottom:12px;"><i class="ti ti-info-circle"></i>বিবরণ</div>
+    <p style="font-size:15px;color:var(--text2);line-height:1.8;">${p.desc}</p>
+    ${p.facts ? `<div style="margin-top:14px;background:var(--gold-dim);border:1px solid var(--gold-border);border-radius:var(--r-md);padding:12px 16px;font-size:13px;color:#8a6010;"><i class="ti ti-bulb" style="margin-right:6px;"></i><strong>মজার তথ্য:</strong> ${p.facts}</div>` : ''}`;
+
+  // Requirements bar
+  const reqMap = [
+    {lbl:'পানির প্রয়োজন',val:p.water==='বেশি'?85:p.water==='মাঝারি'?55:30,color:'#4fc3f7'},
+    {lbl:'সূর্যালোক',val:p.sun==='পূর্ণ রোদ'?90:p.sun==='আংশিক'?55:30,color:'#ffd54f'},
+    {lbl:'তাপমাত্রা সহনশীলতা',val:65,color:'#ff8a65'},
+  ];
+  document.getElementById('pd-requirements').innerHTML = `
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:20px;">
+    <div style="font-weight:700;font-size:14px;margin-bottom:16px;color:var(--text1);">পরিবেশ চাহিদা</div>
+    ${reqMap.map(r => `
+      <div class="req-bar-label"><span>${r.lbl}</span><span style="color:${r.color}">${r.val}%</span></div>
+      <div class="req-bar-track"><div class="req-bar-fill" style="width:${r.val}%;background:${r.color};"></div></div>
+    `).join('')}
+    </div>`;
+
+  // Cultivation tab
+  document.getElementById('pd-cultivation-content').innerHTML = `
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:22px;margin-bottom:16px;">
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px;"><i class="ti ti-list-numbers" style="color:var(--g400);"></i>চাষের ধাপসমূহ</h3>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        ${(p.steps||[]).map((s,i) => `
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="min-width:32px;height:32px;border-radius:50%;background:var(--grad-green);color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;">${i+1}</div>
+            <div style="padding-top:6px;font-size:14px;color:var(--text2);">${s}</div>
+          </div>`).join('')}
+      </div>
+    </div>`;
+
+  // Disease tab
+  document.getElementById('pd-disease-content').innerHTML = `
+    <div class="info-grid-2">
+      ${(p.diseases||[]).map(d => `
+        <div class="info-block" style="border-left:3px solid var(--red);">
+          <i class="ti ti-virus info-block-icon" style="color:var(--red);"></i>
+          <div class="info-block-val" style="font-size:14px;">${d}</div>
+        </div>`).join('')}
+    </div>
+    <div style="margin-top:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:22px;">
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:14px;"><i class="ti ti-first-aid-kit" style="color:var(--g400);margin-right:8px;"></i>চিকিৎসা পদ্ধতি</h3>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        ${(p.treatments||[]).map((t,i) => `
+          <div class="treatment-step"><div class="t-num">${i+1}</div><span>${t}</span></div>`).join('')}
+      </div>
+    </div>`;
+
+  // Nutrition
+  document.getElementById('pd-nutrition-content').innerHTML = `
+    <div class="info-block" style="margin-bottom:16px;">
+      <i class="ti ti-salad info-block-icon"></i>
+      <div class="info-block-label">পুষ্টিগুণ</div>
+      <div class="info-block-val" style="font-size:15px;font-weight:400;line-height:1.7;">${p.nutrition}</div>
+    </div>`;
+
+  // Market
+  document.getElementById('pd-market-content').innerHTML = `
+    <div class="info-grid-2">
+      <div class="info-block">
+        <i class="ti ti-currency-taka info-block-icon" style="color:var(--gold);"></i>
+        <div class="info-block-label">বর্তমান বাজার মূল্য</div>
+        <div class="info-block-val">${p.marketVal}</div>
+      </div>
+      <div class="info-block">
+        <i class="ti ti-chart-bar info-block-icon"></i>
+        <div class="info-block-label">প্রত্যাশিত ফলন</div>
+        <div class="info-block-val">${p.yield}</div>
+      </div>
+    </div>`;
+
+  // Reset tabs
+  document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', i===0));
+  document.querySelectorAll('.tab-panel').forEach((p,i) => p.classList.toggle('active', i===0));
+
+  goPage('plant-detail');
+}
+
+function switchTab(id) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  document.getElementById('tab-'+id)?.classList.add('active');
+}
+
+/* ================================================================
+   DISEASE DETECTOR
+================================================================ */
+let detectorFile = null;
+
+function initDetector() {
+  const chips = document.getElementById('disease-chips');
+  if (chips) chips.innerHTML = DISEASES_DB.filter(d=>d.id!=='healthy').map(d =>
+    `<span class="tag">${d.name.split('(')[0].trim()}</span>`).join('');
+}
+
+function dzOver(e) { e.preventDefault(); document.getElementById('upload-zone')?.classList.add('drag'); }
+function dzLeave() { document.getElementById('upload-zone')?.classList.remove('drag'); }
+function dzDrop(e) { e.preventDefault(); dzLeave(); processDetectorFile(e.dataTransfer.files[0]); }
+function handleDetectorFile(e) { processDetectorFile(e.target.files[0]); }
+
+function processDetectorFile(file) {
+  if (!file) return;
+  detectorFile = file;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    document.getElementById('det-preview-img').src = ev.target.result;
+    document.getElementById('preview-section').classList.add('show');
+    document.getElementById('upload-zone').style.display = 'none';
+    document.getElementById('detection-result').classList.remove('show');
+    document.getElementById('detector-tips-card').style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+}
+
+function resetDetector() {
+  detectorFile = null;
+  document.getElementById('preview-section').classList.remove('show');
+  document.getElementById('upload-zone').style.display = '';
+  document.getElementById('detection-result').classList.remove('show');
+  document.getElementById('ai-processing').classList.remove('show');
+  document.getElementById('detector-tips-card').style.display = 'block';
+}
+
+const DET_STEPS = [
+  'ছবির রেজোলিউশন ও ফরম্যাট যাচাই...',
+  'পাতার রঙ ও টেক্সচার বিশ্লেষণ...',
+  '১০০০+ প্যাটার্নের সাথে মিলানো...',
+  'Confidence Score নির্ধারণ...',
+];
+
+function startDetection() {
+  if (!detectorFile) return;
+  const { disease, hash } = detectDisease(detectorFile);
+  const conf = getConf(disease, hash);
+
+  document.getElementById('preview-section').classList.remove('show');
+  document.getElementById('ai-processing').classList.add('show');
+  document.getElementById('detection-result').classList.remove('show');
+  document.getElementById('detector-tips-card').style.display = 'none';
+
+  const stepEl = document.getElementById('ai-process-step');
+  let si = 0;
+  const stps = [0,1,2,3].map(i => document.getElementById('astep-'+i));
+  stps.forEach(s => { s.className='ai-step-dot'; });
+  stps[0].className = 'ai-step-dot active';
+
+  function tick() {
+    if (si < DET_STEPS.length) {
+      stepEl.textContent = DET_STEPS[si];
+      stps.forEach((s,i) => {
+        s.className = 'ai-step-dot' + (i < si?' done':i===si?' active':'');
+      });
+      si++;
+      setTimeout(tick, 750);
+    } else {
+      stps.forEach(s => s.className = 'ai-step-dot done');
+      setTimeout(() => showDetectionResult(disease, conf), 400);
+    }
+  }
+  tick();
+}
+
+function showDetectionResult(d, conf) {
+  document.getElementById('ai-processing').classList.remove('show');
+  document.getElementById('preview-section').classList.add('show');
+
+  const isHealthy = d.id === 'healthy';
+  const resultEl = document.getElementById('detection-result');
+  resultEl.innerHTML = `
+    <div class="result-card">
+      <div class="result-card-header" style="background:${d.bg};">
+        <div class="result-icon-circle" style="background:${d.bg};border:2px solid ${d.color}33;">
+          <i class="ti ${d.icon}" style="color:${d.color};font-size:28px;"></i>
+        </div>
+        <div>
+          <div class="badge" style="background:${d.bg};color:${d.color};border-color:${d.color}44;margin-bottom:6px;">${d.badge} ${isHealthy?'কোনো রোগ নেই':'রোগ সনাক্ত'}</div>
+          <div class="result-disease-name">${d.name}</div>
+        </div>
+      </div>
+      <div class="result-card-body">
+        <div class="conf-row">
+          <span style="color:var(--text2);">AI আস্থার মাত্রা</span>
+          <span style="font-size:20px;font-weight:700;color:${d.color};">${conf}%</span>
+        </div>
+        <div class="conf-track"><div class="conf-fill" id="conf-fill" style="width:0%;background:linear-gradient(90deg,${d.color}88,${d.color});box-shadow:0 0 8px ${d.color}55;"></div></div>
+
+        ${!isHealthy ? `
+        <div style="margin-bottom:14px;">
+          <div style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;">সম্ভাব্য কারণ</div>
+          <div style="display:flex;flex-wrap:wrap;gap:7px;">
+            ${(d.causes||[]).map(c => `<span class="badge badge-amb"><i class="ti ti-question-mark"></i>${c}</span>`).join('')}
+          </div>
+        </div>` : ''}
+
+        <div>
+          <div style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;">চিকিৎসা পরামর্শ</div>
+          <div class="treatment-steps">
+            ${d.treatments.map((t,i) => `<div class="treatment-step"><div class="t-num">${i+1}</div><span>${t}</span></div>`).join('')}
+          </div>
+        </div>
+
+        <div style="margin-top:14px;background:var(--g50);border-radius:var(--r-md);padding:12px 14px;font-size:12px;color:var(--text2);">
+          <strong style="color:var(--g500);">প্রতিরোধ:</strong> ${d.prevention}
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;">
+          <div class="info-block"><div class="info-block-label">তীব্রতা</div><div class="info-block-val">${d.severity}</div></div>
+          <div class="info-block"><div class="info-block-label">বিস্তার সময়</div><div class="info-block-val">${d.spreadDays}</div></div>
+        </div>
+
+        <button class="btn btn-primary" style="width:100%;margin-top:16px;" onclick="resetDetector()"><i class="ti ti-refresh"></i>নতুন ছবি পরীক্ষা করুন</button>
+      </div>
+    </div>`;
+
+  resultEl.classList.add('show');
+  setTimeout(() => {
+    const fill = document.getElementById('conf-fill');
+    if (fill) fill.style.width = conf + '%';
+  }, 300);
+}
+
+/* ================================================================
+   TOOLS PAGE
+================================================================ */
+const TOOL_DEFS = [
+  {
+    id:'fertilizer', title:'সার ক্যালকুলেটর', desc:'সঠিক পরিমাণ সার নির্ধারণ করুন',
+    icon:'🧪', iconBg:'var(--g50)', color:'var(--g400)',
+    html: `
+      <div class="form-group">
+        <label class="form-label">ফসলের ধরন</label>
+        <select class="form-select" id="fert-crop">
+          <option>ধান</option><option>গম</option><option>আলু</option><option>টমেটো</option><option>সবজি</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">জমির পরিমাণ (একর)</label>
+          <input type="number" class="form-input" id="fert-area" placeholder="যেমন: 1.5" min="0.1" step="0.1">
+        </div>
+        <div class="form-group">
+          <label class="form-label">মাটির ধরন</label>
+          <select class="form-select" id="fert-soil">
+            <option>দোআঁশ</option><option>এঁটেল</option><option>বেলে</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-primary" style="width:100%;" onclick="calcFertilizer()"><i class="ti ti-calculator"></i>হিসাব করুন</button>
+      <div class="result-box" id="fert-result">
+        <div class="result-box-title">প্রয়োজনীয় সার</div>
+        <div id="fert-result-body"></div>
+      </div>`
+  },
+  {
+    id:'water', title:'সেচ ক্যালকুলেটর', desc:'পানির পরিমাণ ও সেচের সময় নির্ধারণ',
+    icon:'💧', iconBg:'var(--teal-dim)', color:'var(--teal)',
+    html:`
+      <div class="form-group">
+        <label class="form-label">ফসল</label>
+        <select class="form-select" id="w-crop">
+          <option>ধান</option><option>গম</option><option>আলু</option><option>সবজি</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">জমি (একর)</label>
+          <input type="number" class="form-input" id="w-area" placeholder="1.0" min="0.1" step="0.1">
+        </div>
+        <div class="form-group">
+          <label class="form-label">মৌসুম</label>
+          <select class="form-select" id="w-season">
+            <option>গ্রীষ্ম</option><option>বর্ষা</option><option>শীত</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-primary" style="width:100%;background:linear-gradient(135deg,#26a69a,var(--teal));" onclick="calcWater()"><i class="ti ti-droplet"></i>হিসাব করুন</button>
+      <div class="result-box" id="w-result">
+        <div class="result-box-title">সেচের পরিমাণ</div>
+        <div id="w-result-body"></div>
+      </div>`
+  },
+  {
+    id:'profit', title:'মুনাফা ক্যালকুলেটর', desc:'ফসল চাষের লাভ-ক্ষতি হিসাব',
+    icon:'💰', iconBg:'var(--gold-dim)', color:'var(--gold)',
+    html:`
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">জমি (একর)</label>
+          <input type="number" class="form-input" id="p-area" placeholder="1.0">
+        </div>
+        <div class="form-group">
+          <label class="form-label">ফলন (কেজি/একর)</label>
+          <input type="number" class="form-input" id="p-yield" placeholder="2000">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">বিক্রয় মূল্য (৳/কেজি)</label>
+          <input type="number" class="form-input" id="p-price" placeholder="35">
+        </div>
+        <div class="form-group">
+          <label class="form-label">উৎপাদন খরচ (৳/একর)</label>
+          <input type="number" class="form-input" id="p-cost" placeholder="20000">
+        </div>
+      </div>
+      <button class="btn btn-gold" style="width:100%;" onclick="calcProfit()"><i class="ti ti-currency-taka"></i>মুনাফা হিসাব</button>
+      <div class="result-box" id="p-result">
+        <div class="result-box-title">ফলাফল</div>
+        <div id="p-result-body"></div>
+      </div>`
+  },
+  {
+    id:'yield', title:'ফলন অনুমানকারী', desc:'প্রত্যাশিত ফলন হিসাব করুন',
+    icon:'📊', iconBg:'rgba(26,171,138,.1)', color:'var(--teal)',
+    html:`
+      <div class="form-group">
+        <label class="form-label">ফসল নির্বাচন করুন</label>
+        <select class="form-select" id="y-crop">
+          <option value="rice">ধান (৪-৬ টন/হে.)</option>
+          <option value="wheat">গম (২-৪ টন/হে.)</option>
+          <option value="potato">আলু (২০-৩০ টন/হে.)</option>
+          <option value="maize">ভুট্টা (৭-১০ টন/হে.)</option>
+          <option value="tomato">টমেটো (৩০-৫০ টন/হে.)</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">জমি (হেক্টর)</label>
+          <input type="number" class="form-input" id="y-area" placeholder="1.0" step="0.1">
+        </div>
+        <div class="form-group">
+          <label class="form-label">মাটির মান</label>
+          <select class="form-select" id="y-soil">
+            <option value="1">উর্বর</option>
+            <option value="0.8">মাঝারি</option>
+            <option value="0.6">দুর্বল</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-primary" style="width:100%;" onclick="calcYield()"><i class="ti ti-chart-bar"></i>ফলন অনুমান</button>
+      <div class="result-box" id="y-result">
+        <div class="result-box-title">প্রত্যাশিত ফলন</div>
+        <div id="y-result-body"></div>
+      </div>`
+  },
+  {
+    id:'recommend', title:'ফসল পরামর্শ', desc:'মাটি ও আবহাওয়া অনুযায়ী ফসল',
+    icon:'🌱', iconBg:'var(--amb-dim)', color:'var(--amb)',
+    html:`
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">মাটির ধরন</label>
+          <select class="form-select" id="r-soil">
+            <option>দোআঁশ</option><option>এঁটেল</option><option>বেলে</option><option>পলি</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">মৌসুম</label>
+          <select class="form-select" id="r-season">
+            <option>খরিফ (গ্রীষ্ম-বর্ষা)</option><option>রবি (শীত)</option><option>জায়েদ (গ্রীষ্ম)</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">জলসেচের সুবিধা</label>
+        <select class="form-select" id="r-water">
+          <option>পূর্ণ সেচ সুবিধা</option><option>আংশিক সেচ</option><option>বৃষ্টির উপর নির্ভর</option>
+        </select>
+      </div>
+      <button class="btn btn-gold" style="width:100%;background:linear-gradient(135deg,#e08c20,var(--gold-l));" onclick="calcRecommend()"><i class="ti ti-bulb"></i>পরামর্শ পান</button>
+      <div class="result-box" id="r-result">
+        <div class="result-box-title">প্রস্তাবিত ফসল</div>
+        <div id="r-result-body"></div>
+      </div>`
+  },
+  {
+    id:'harvest', title:'ফসল কাটার সময়', desc:'বপনের তারিখ থেকে ফসল কাটার সময়',
+    icon:'🌾', iconBg:'var(--red-dim)', color:'var(--red)',
+    html:`
+      <div class="form-group">
+        <label class="form-label">ফসল</label>
+        <select class="form-select" id="h-crop">
+          <option value="90">ধান - বোরো (১৪০ দিন)</option>
+          <option value="140">ধান - আমন (১৬০ দিন)</option>
+          <option value="90">আলু (৯০ দিন)</option>
+          <option value="110">গম (১১০ দিন)</option>
+          <option value="80">টমেটো (৮০ দিন)</option>
+          <option value="120">পেঁয়াজ (১২০ দিন)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">বপন / রোপণের তারিখ</label>
+        <input type="date" class="form-input" id="h-date">
+      </div>
+      <button class="btn btn-primary" style="width:100%;background:linear-gradient(135deg,var(--red),#ff7043);" onclick="calcHarvest()"><i class="ti ti-calendar-event"></i>সময় হিসাব করুন</button>
+      <div class="result-box" id="h-result">
+        <div class="result-box-title">ফসল কাটার তারিখ</div>
+        <div id="h-result-body"></div>
+      </div>`
+  },
+];
+
+function renderTools() {
+  const grid = document.getElementById('tools-page-grid');
+  if (!grid) return;
+  grid.innerHTML = TOOL_DEFS.map(t => `
+    <div class="tool-panel">
+      <div class="tool-panel-header">
+        <div class="tool-panel-icon" style="background:${t.iconBg};font-size:26px;">${t.icon}</div>
+        <div>
+          <div class="tool-panel-title">${t.title}</div>
+          <div class="tool-panel-desc">${t.desc}</div>
+        </div>
+      </div>
+      <div class="tool-panel-body">${t.html}</div>
+    </div>`).join('');
+}
+
+function switchTool(id) {
+  renderTools();
+  setTimeout(() => {
+    const el = document.getElementById('tool-'+id);
+    el?.scrollIntoView({behavior:'smooth',block:'start'});
+  }, 100);
+}
+
+/* Tool Calculators */
+function calcFertilizer() {
+  const area = parseFloat(document.getElementById('fert-area').value) || 1;
+  const crop = document.getElementById('fert-crop').value;
+  const fertMap = { 'ধান':'ইউরিয়া: '+(area*50|0)+'kg, TSP: '+(area*25|0)+'kg, MOP: '+(area*20|0)+'kg', 'গম':'ইউরিয়া: '+(area*45|0)+'kg, TSP: '+(area*22|0)+'kg', 'আলু':'ইউরিয়া: '+(area*40|0)+'kg, TSP: '+(area*30|0)+'kg, MOP: '+(area*30|0)+'kg', 'টমেটো':'ইউরিয়া: '+(area*35|0)+'kg, TSP: '+(area*28|0)+'kg', 'সবজি':'ইউরিয়া: '+(area*30|0)+'kg, TSP: '+(area*20|0)+'kg' };
+  const rb = document.getElementById('fert-result');
+  document.getElementById('fert-result-body').innerHTML = `<div style="font-size:15px;color:var(--g600);font-weight:700;">${fertMap[crop]||'পরিমাণ নির্ধারণ হয়নি'}</div><div style="font-size:12px;color:var(--text3);margin-top:6px;">জমি: ${area} একর · ফসল: ${crop}</div>`;
+  rb.classList.add('show');
+}
+function calcWater() {
+  const area = parseFloat(document.getElementById('w-area').value) || 1;
+  const crop = document.getElementById('w-crop').value;
+  const season = document.getElementById('w-season').value;
+  const base = crop==='ধান'?1200:crop==='আলু'?500:400;
+  const sMulti = season==='গ্রীষ্ম'?1.3:season==='বর্ষা'?0.6:1.0;
+  const total = (base * sMulti * area * 4047 / 1000).toFixed(0);
+  document.getElementById('w-result-body').innerHTML = `<div style="font-size:22px;font-weight:700;color:var(--teal);">${parseInt(total).toLocaleString()} লিটার/সপ্তাহ</div><div style="font-size:12px;color:var(--text3);margin-top:6px;">${crop} · ${season} মৌসুম · ${area} একর</div>`;
+  document.getElementById('w-result').classList.add('show');
+}
+function calcProfit() {
+  const area = parseFloat(document.getElementById('p-area').value)||1;
+  const yld = parseFloat(document.getElementById('p-yield').value)||2000;
+  const price = parseFloat(document.getElementById('p-price').value)||35;
+  const cost = parseFloat(document.getElementById('p-cost').value)||20000;
+  const revenue = area * yld * price;
+  const totalCost = area * cost;
+  const profit = revenue - totalCost;
+  const pct = ((profit/totalCost)*100).toFixed(1);
+  const color = profit>=0?'var(--g500)':'var(--red)';
+  document.getElementById('p-result-body').innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:8px;">
+      <div><div style="font-size:11px;color:var(--text3);">মোট আয়</div><div style="font-weight:700;color:var(--g500);">৳${revenue.toLocaleString()}</div></div>
+      <div><div style="font-size:11px;color:var(--text3);">মোট খরচ</div><div style="font-weight:700;color:var(--red);">৳${totalCost.toLocaleString()}</div></div>
+      <div><div style="font-size:11px;color:var(--text3);">নিট মুনাফা</div><div style="font-weight:700;color:${color};">৳${profit.toLocaleString()}</div></div>
+    </div>
+    <div style="font-size:13px;color:${color};font-weight:600;">মুনাফার হার: ${pct}%</div>`;
+  document.getElementById('p-result').classList.add('show');
+}
+function calcYield() {
+  const area = parseFloat(document.getElementById('y-area').value)||1;
+  const soilQ = parseFloat(document.getElementById('y-soil').value)||1;
+  const yldMap = {rice:{min:4,max:6},wheat:{min:2,max:4},potato:{min:20,max:30},maize:{min:7,max:10},tomato:{min:30,max:50}};
+  const crop = document.getElementById('y-crop').value;
+  const key = crop.split('-')[0];
+  const range = yldMap[key]||{min:3,max:5};
+  const minY = (range.min*soilQ*area).toFixed(1), maxY = (range.max*soilQ*area).toFixed(1);
+  document.getElementById('y-result-body').innerHTML = `<div style="font-size:22px;font-weight:700;color:var(--teal);">${minY} – ${maxY} টন</div><div style="font-size:12px;color:var(--text3);margin-top:6px;">${area} হেক্টর জমিতে প্রত্যাশিত ফলন</div>`;
+  document.getElementById('y-result').classList.add('show');
+}
+function calcRecommend() {
+  const soil = document.getElementById('r-soil').value;
+  const season = document.getElementById('r-season').value;
+  const recs = { 'খরিফ (গ্রীষ্ম-বর্ষা)':['ধান (আমন)', 'পাট', 'ভুট্টা', 'আউশ ধান'], 'রবি (শীত)':['ধান (বোরো)', 'গম', 'আলু', 'সরিষা', 'পেঁয়াজ', 'টমেটো'], 'জায়েদ (গ্রীষ্ম)':['মিষ্টি কুমড়া', 'তরমুজ', 'শসা', 'করলা'] };
+  const list = recs[season]||['ধান','গম'];
+  document.getElementById('r-result-body').innerHTML = `<div style="display:flex;flex-wrap:wrap;gap:8px;">${list.map(c=>`<span class="badge badge-green"><i class="ti ti-check"></i>${c}</span>`).join('')}</div><div style="font-size:12px;color:var(--text3);margin-top:10px;">${season} মৌসুমে ${soil} মাটিতে উপযুক্ত ফসল</div>`;
+  document.getElementById('r-result').classList.add('show');
+}
+function calcHarvest() {
+  const days = parseInt(document.getElementById('h-crop').value)||90;
+  const dateStr = document.getElementById('h-date').value;
+  if (!dateStr) { alert('রোপণের তারিখ দিন'); return; }
+  const d = new Date(dateStr);
+  d.setDate(d.getDate() + days);
+  const opts = {year:'numeric',month:'long',day:'numeric'};
+  document.getElementById('h-result-body').innerHTML = `<div style="font-size:18px;font-weight:700;color:var(--g500);">${d.toLocaleDateString('bn-BD',opts)}</div><div style="font-size:12px;color:var(--text3);margin-top:6px;">বপন থেকে ${days} দিন পর</div>`;
+  document.getElementById('h-result').classList.add('show');
+}
+
+/* ================================================================
+   KNOWLEDGE
+================================================================ */
+function knowledgeCardHTML(k) {
+  return `<div class="knowledge-card" onclick="alert('নিবন্ধ: ${k.title}')">
+    <div class="knowledge-card-cover" style="background:${k.bg};">
+      <div class="knowledge-card-cover-overlay" style="background:linear-gradient(to bottom,transparent,rgba(0,0,0,.15));"></div>
+      <span style="position:relative;z-index:1;">${k.emoji}</span>
+    </div>
+    <div class="knowledge-card-body">
+      <div class="knowledge-card-cat">${k.cat==='cultivation'?'চাষ পদ্ধতি':k.cat==='organic'?'জৈব কৃষি':k.cat==='irrigation'?'সেচ':k.cat==='fertilizer'?'সার':k.cat==='pest'?'কীটপতঙ্গ':'স্মার্ট ফার্মিং'}</div>
+      <div class="knowledge-card-title">${k.title}</div>
+      <p style="font-size:12px;color:var(--text3);line-height:1.6;margin-bottom:10px;">${k.desc.slice(0,80)}...</p>
+      <div class="knowledge-card-meta">
+        <span>⏱ ${k.readTime} পড়া</span>
+        <span>${k.date}</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderKnowledge() {
+  const grid = document.getElementById('knowledge-main-grid');
+  if (!grid) return;
+  const filtered = currentKnowledgeCat==='all' ? KNOWLEDGE : KNOWLEDGE.filter(k => k.cat===currentKnowledgeCat);
+  grid.innerHTML = filtered.map(k => knowledgeCardHTML(k)).join('');
+}
+
+function filterKnowledge(el, cat) {
+  currentKnowledgeCat = cat;
+  document.querySelectorAll('#knowledge-filters .filter-pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  renderKnowledge();
+}
+
+/* ================================================================
+   SEASONAL CALENDAR
+================================================================ */
+function renderCalendar() {
+  const table = document.getElementById('season-table');
+  if (!table) return;
+  const typeMap = { p:'<div class="season-block s-plant">বপন</div>', g:'<div class="season-block s-grow">বৃদ্ধি</div>', h:'<div class="season-block s-harvest">ফসল</div>', r:'' };
+  const thead = `<thead><tr><th style="text-align:left;padding-left:16px;">ফসল</th>${MONTHS.map(m=>`<th>${m}</th>`).join('')}</tr></thead>`;
+  const tbody = `<tbody>${SEASON_DATA.map(row => `<tr><td class="crop-name-cell">${row.name}</td>${row.data.map(d=>`<td>${typeMap[d]||''}</td>`).join('')}</tr>`).join('')}</tbody>`;
+  table.innerHTML = thead + tbody;
+
+  const grid = document.getElementById('season-info-grid');
+  if (grid) grid.innerHTML = PLANTS.filter(p => ['rice','wheat','potato','maize','tomato','jute'].includes(p.id)).map(p => plantCardHTML(p)).join('');
+}
+
+/* ================================================================
+   SEARCH
+================================================================ */
+function openSearch() { document.getElementById('search-modal').classList.add('open'); document.getElementById('search-input').focus(); renderSearchDefault(); }
+function closeSearch() { document.getElementById('search-modal').classList.remove('open'); }
+
+function renderSearchDefault() {
+  const res = document.getElementById('search-results');
+  res.innerHTML = `<div class="search-cat-label">জনপ্রিয় গাছ</div>` +
+    PLANTS.slice(0,5).map(p => `
+      <div class="search-result-item" onclick="openPlant('${p.id}');closeSearch();">
+        <div class="search-result-emoji">${p.emoji}</div>
+        <div><div class="search-result-title">${p.name}</div><div class="search-result-sub">${p.eng} · ${p.sci}</div></div>
+      </div>`).join('') +
+    `<div class="search-cat-label">গাইড</div>` +
+    KNOWLEDGE.slice(0,3).map(k => `
+      <div class="search-result-item" onclick="goPage('knowledge');closeSearch();">
+        <div class="search-result-emoji" style="font-size:20px;">${k.emoji}</div>
+        <div><div class="search-result-title">${k.title}</div><div class="search-result-sub">${k.readTime} পড়া</div></div>
+      </div>`).join('');
+}
+
+function handleSearch(q) {
+  const res = document.getElementById('search-results');
+  if (!q.trim()) { renderSearchDefault(); return; }
+  const plants = PLANTS.filter(p => p.name.includes(q) || p.eng.toLowerCase().includes(q.toLowerCase()) || p.sci.toLowerCase().includes(q.toLowerCase()));
+  const guides = KNOWLEDGE.filter(k => k.title.includes(q));
+  let html = '';
+  if (plants.length) {
+    html += `<div class="search-cat-label">উদ্ভিদ</div>` + plants.slice(0,5).map(p =>
+      `<div class="search-result-item" onclick="openPlant('${p.id}');closeSearch();">
+        <div class="search-result-emoji">${p.emoji}</div>
+        <div><div class="search-result-title">${p.name}</div><div class="search-result-sub">${p.eng}</div></div>
+      </div>`).join('');
+  }
+  if (guides.length) {
+    html += `<div class="search-cat-label">গাইড</div>` + guides.slice(0,3).map(k =>
+      `<div class="search-result-item" onclick="goPage('knowledge');closeSearch();">
+        <div class="search-result-emoji">${k.emoji}</div>
+        <div><div class="search-result-title">${k.title}</div><div class="search-result-sub">${k.readTime}</div></div>
+      </div>`).join('');
+  }
+  res.innerHTML = html || `<div style="padding:24px;text-align:center;color:var(--text3);font-size:14px;">কোনো ফলাফল পাওয়া যায়নি</div>`;
+}
+
+/* ================================================================
+   CHATBOT
+================================================================ */
+const BOT_ANSWERS = {
+  'ধান': 'ধান বাংলাদেশের প্রধান ফসল। বোরো মৌসুমে ডিসেম্বরে বোনা হয় এবং মার্চ-এপ্রিলে কাটা হয়। আমন মৌসুমে জুন-জুলাইয়ে বোনা হয় নভেম্বর-ডিসেম্বরে কাটা হয়।',
+  'টমেটো': 'টমেটো শীতকালীন ফসল। সেপ্টেম্বর-অক্টোবরে বীজতলা করুন। প্রতিটি গাছে মাচা দিন। সেচ নিয়মিত দিন কিন্তু পানি জমতে দেবেন না।',
+  'সেচ': 'সেচের সময় মাটির আর্দ্রতা পরীক্ষা করুন। সকালে বা বিকালে সেচ দিন। গরমের সময় বেশি সেচ দরকার। ড্রিপ সেচে পানি সাশ্রয় হয়।',
+  'জৈব সার': 'জৈব সার তৈরিতে: রান্নাঘরের বর্জ্য, পাতা, ঘাস ৩ মাস পচিয়ে তৈরি করুন। মাটির সাথে মিশিয়ে দিন। গাছের গোড়ায় প্রয়োগ করুন।',
+  'রোগ': 'গাছের রোগ দেখলে AI Detector ব্যবহার করুন। সাধারণত ছত্রাকনাশক স্প্রে দিতে হয়। আক্রান্ত পাতা কেটে ফেলুন।',
+  'default': 'আমি কৃষি সম্পর্কে বিভিন্ন প্রশ্নের উত্তর দিতে পারি। ধান, সবজি, ফল চাষ, রোগ দমন, সেচ বা সার সম্পর্কে জিজ্ঞেস করুন!'
+};
+
+function toggleChat() {
+  const panel = document.getElementById('chatbot-panel');
+  panel.classList.toggle('open');
+}
+
+function sendChat(msg) {
+  addChatMsg(msg, 'user');
+  document.getElementById('chat-suggestions').style.display = 'none';
+  setTimeout(() => {
+    const key = Object.keys(BOT_ANSWERS).find(k => msg.includes(k)) || 'default';
+    addChatMsg(BOT_ANSWERS[key], 'bot');
+  }, 800);
+}
+
+function sendChatInput() {
+  const inp = document.getElementById('chat-input');
+  const msg = inp.value.trim();
+  if (!msg) return;
+  inp.value = '';
+  sendChat(msg);
+}
+
+function addChatMsg(text, type) {
+  const msgs = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = `chat-msg chat-msg-${type}`;
+  div.innerHTML = `<div class="chat-bubble chat-bubble-${type}">${text}</div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+/* ================================================================
+   MOBILE NAV
+================================================================ */
+function toggleMobileNav() { document.getElementById('mobile-nav').classList.toggle('open'); }
+function closeMobileNav() { document.getElementById('mobile-nav').classList.remove('open'); }
+
+/* Close search on outside click */
+document.getElementById('search-modal').addEventListener('click', e => {
+  if (e.target === document.getElementById('search-modal')) closeSearch();
+});
+
+/* Keyboard shortcuts */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeSearch(); closeMobileNav(); }
+  if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
+});
+
+/* ================================================================
+   INIT
+================================================================ */
+window.addEventListener('DOMContentLoaded', () => {
+  initHome();
+  initDetector();
+  // Set today's date for harvest calc (deferred)
+  setTimeout(() => {
+    const hd = document.getElementById('h-date');
+    if (hd) hd.valueAsDate = new Date();
+  }, 500);
+});
+</script>
+</body>
+</html>
